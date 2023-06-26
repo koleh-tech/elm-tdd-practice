@@ -20,6 +20,10 @@ normalYearSuite =
             \_ ->
                 isLeapYear 5
                 |> Expect.equal False
+            , test "They are divisible by 100" <|
+            \_ ->
+                isLeapYear 100
+                |> Expect.equal False
         ]
 
 leapYearSuite : Test
