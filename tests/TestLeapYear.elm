@@ -41,6 +41,11 @@ leapYearSuite =
                 |> Expect.equal True
             , test "They are divisible by 400" <|
             \_ ->
-                isLeapYear 400
-                |> Expect.equal True
+                let input =
+                        [400, 2000, 1900, 1996]
+                in
+                    List.map isLeapYear input
+                    |> List.filter (\x -> x == True)
+                    |> List.length
+                    |> Expect.equal 2
         ]
