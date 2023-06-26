@@ -14,9 +14,9 @@ import LeapYear exposing (isLeapYear)
 
 suite : Test
 suite =
-    describe "Leap year"
+    describe "Years are not leap years if"
         [
-            test "Years not divisible by 4 are not leap years" <|
+            test "They are not divisible by 4" <|
             \_ ->
                 isLeapYear 5
                 |> Expect.equal False
