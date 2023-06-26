@@ -47,5 +47,5 @@ leapYearSuite =
                     List.map isLeapYear input
                     |> List.filter (\x -> x == True)
                     |> List.length
-                    |> Expect.equal 2
+                    |> Expect.equal 3
         ]
