@@ -2,4 +2,8 @@ module LeapYear exposing (isLeapYear)
 
 isLeapYear : Int -> Bool
 isLeapYear year =
-    remainderBy 4 year == 0 && remainderBy 100 year /= 0
+    case remainderBy 4 year of
+        0 ->
+            remainderBy 100 year /= 0
+        _ ->
+            False
