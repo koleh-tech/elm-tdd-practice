@@ -12,14 +12,19 @@ import LeapYear exposing (isLeapYear)
 -- 
 -- For example, 2001 is a typical common year and 1996 is a typical leap year, whereas 1900 is an atypical common year and 2000 is an atypical leap year.
 
-normalYearSuite : Test
-normalYearSuite =
-    describe "Years are not leap years if"
+commonYearSuite : Test
+commonYearSuite =
+    describe "Years are common years if"
         [
             test "They are not divisible by 4" <|
             \_ ->
-                isLeapYear 5
-                |> Expect.equal False
+                let input =
+                        [5, 2001, 1900, 1996]
+                in
+                    List.map isLeapYear input
+                    |> List.filter (\x -> x == False)
+                    |> List.length
+                    |> Expect.equal 3
             , test "They are divisible by 100" <|
             \_ ->
                 isLeapYear 100
