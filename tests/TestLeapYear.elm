@@ -34,4 +34,8 @@ leapYearSuite =
             \_ ->
                 isLeapYear 4
                 |> Expect.equal True
+            , test "They are divisible by 400" <|
+            \_ ->
+                isLeapYear 400
+                |> Expect.equal True
         ]
