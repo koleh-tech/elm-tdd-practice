@@ -1,26 +1,29 @@
-module BestShuffle exposing (stringDiffScore, bestOutOfShuffledStrings)
+module BestShuffle exposing (numberOfDifferingCharacters, bestOutOfShuffledStrings)
 import String exposing (toList)
 import List exposing (map2, filter, length)
 import List.Extra exposing (minimumWith)
 
-stringDiffScore : String -> String -> Int
-stringDiffScore originalString shuffledString =
+numberOfDifferingCharacters : String -> String -> Int
+numberOfDifferingCharacters originalString shuffledString =
     let 
         originalStringChars = toList originalString
         shuffledStringChars = toList shuffledString
-        charsMatch = (\char1 char2 -> char1 == char2)
+        charactersMatch = (\char1 char2 -> char1 == char2)
     in
-    map2 charsMatch originalStringChars shuffledStringChars
+    map2 charactersMatch originalStringChars shuffledStringChars
         |> filter (\match -> match)
         |> length
         
 bestOutOfShuffledStrings : String -> List String -> String
 bestOutOfShuffledStrings originalString shuffledStrings =
     let
-        diffFromOriginalString = stringDiffScore originalString
-        bestString = minimumWith (\str1 str2 -> if diffFromOriginalString(str1) > diffFromOriginalString(str2) then GT else LT) shuffledStrings
+        diffFromOriginalString = numberOfDifferingCharacters originalString
+        compareStrings = (\str1 str2 ->
+            if diffFromOriginalString(str1) > diffFromOriginalString(str2)
+            then GT else LT
+            )
     in
-        case bestString of
+        case minimumWith compareStrings shuffledStrings of
             Nothing ->
                 originalString
             Just result ->
