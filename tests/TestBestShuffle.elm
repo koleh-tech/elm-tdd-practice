@@ -101,12 +101,22 @@ shuffleStringSuite =
                     |> Expect.equal 720
         ]
 
-bestShuffleSuite : Test
-bestShuffleSuite =
+bestShuffleErrHandlingSuite : Test
+bestShuffleErrHandlingSuite =
     describe "bestShuffle will return Nothing if"
         [ test "the input string contains spaces" <|
             \_ ->
                 bestShuffle "a b"
                     |> Expect.equal Nothing
+        ]
+
+bestShuffleValidSuite : Test
+bestShuffleValidSuite =
+    describe "given valid input, bestShuffle will:"
+        [ test "return the original input if it is only one character long" <|
+            \_ ->
+                bestShuffle "a"
+                    |> (\x -> x == Just "a")
+                    |> Expect.equal True
         ]
 

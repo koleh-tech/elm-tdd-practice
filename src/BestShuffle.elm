@@ -38,3 +38,4 @@ shuffleString originalString =
 bestShuffle : String -> Maybe String
 bestShuffle input =
     Nothing
+    -- if String.contains " " input then Nothing else Just input
