@@ -10,11 +10,11 @@ jobs:
 
   build:
 
-    runs-on: ubuntu:latest
+    runs-on: ubuntu-latest
 
     steps:
     - uses: actions/checkout@v3
     - name: Build the Docker image
       run: |
-        docker build -t . --file Dockerfile --tag my-manjaro-image:$(date +%s)
-        docker run -t my-manjaro-image make
+        docker build -t . --file Dockerfile --tag my-ubuntu-image:$(date +%s)
+        docker run -t my-ubuntu-image make
