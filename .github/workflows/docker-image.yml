@@ -15,4 +15,6 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
+      run: |
+        docker build -t . --file Dockerfile --tag my-manjaro-image:$(date +%s)
+        docker run -t my-manjaro-image make

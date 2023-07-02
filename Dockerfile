@@ -5,7 +5,7 @@ FROM manjarolinux/base:latest
 RUN pacman --noconfirm -Syu
 
 # Install necessary packages
-RUN pacman --noconfirm -S npm
+RUN pacman --noconfirm -S npm make
 RUN npm install --global elm elm-live@next elm-format elm-test 
 
 # Set the working directory
