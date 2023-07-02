@@ -77,7 +77,7 @@ view model =
             ]
         , div [ class "container" ]
             [ h1 [ class "title" ] [ text "Best shuffle" ]
-            , h2 [ class "subtitle" ] [ text "Gives the best shuffle of a word" ]
+            , h2 [ class "subtitle" ] [ text "Finds a shuffled version of words with as many differing characters as possible." ]
             , label [ for "ToShuffle", class "label" ] [ text "Word to shuffle:" ]
             , input
                 ([ name "ToShuffle"
