@@ -1,6 +1,7 @@
 module BestShuffle exposing (stringDiffScore, bestOutOfShuffledStrings)
 import String exposing (toList)
 import List exposing (map2, filter, length)
+import List.Extra exposing (minimumWith)
 
 stringDiffScore : String -> String -> Int
 stringDiffScore originalString shuffledString =
@@ -15,4 +16,12 @@ stringDiffScore originalString shuffledString =
         
 bestOutOfShuffledStrings : String -> List String -> String
 bestOutOfShuffledStrings originalString shuffledStrings =
-    "eetr"
+    let
+        diffFromOriginalString = stringDiffScore originalString
+        bestString = minimumWith (\str1 str2 -> if diffFromOriginalString(str1) > diffFromOriginalString(str2) then GT else LT) shuffledStrings
+    in
+        case bestString of
+            Nothing ->
+                originalString
+            Just result ->
+                result

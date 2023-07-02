@@ -69,10 +69,10 @@ maxStringDiffSuite =
             \_ ->
                 bestOutOfShuffledStrings "tree" ["eetr", "eter", "tere"]
                     |> Expect.equal "eetr"
-        , test "If several shuffled strings are just as shuffled, picks first one" <|
+        , test "If several shuffled strings are just as shuffled, picks last one" <|
             \_ ->
                 bestOutOfShuffledStrings "grrrrrr" ["rgrrrrr", "rrgrrrr", "rrrgrrr"]
-                    |> Expect.equal "rgrrrrr"
+                    |> Expect.equal "rrrgrrr"
 
         ]
 
