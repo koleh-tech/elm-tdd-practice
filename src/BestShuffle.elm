@@ -1,14 +1,14 @@
-module BestShuffle exposing (stringDiffScore, differingChars)
+module BestShuffle exposing (stringDiffScore)
 import String exposing (toList)
-import List exposing (map2)
-
-charsMatch char1 char2 =
-    char1 == char2
+import List exposing (map2, filter, length)
 
 stringDiffScore : String -> String -> Int
 stringDiffScore originalString shuffledString =
-    0
-
-differingChars : List Char -> List Char -> List Bool
-differingChars originalStringChars shuffledStringChars =
+    let 
+        originalStringChars = toList originalString
+        shuffledStringChars = toList shuffledString
+        charsMatch = (\char1 char2 -> char1 == char2)
+    in
     map2 charsMatch originalStringChars shuffledStringChars
+        |> filter (\match -> match)
+        |> length
