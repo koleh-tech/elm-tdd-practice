@@ -122,5 +122,10 @@ bestShuffleValidSuite =
                 bestShuffle "a"
                     |> (\x -> x == Just "a")
                     |> Expect.equal True
+        , test "is more than 8 chars long" <|
+            \_ ->
+                bestShuffle "tree"
+                    |> (\x -> x == Just "eetr")
+                    |> Expect.equal True
         ]
 
