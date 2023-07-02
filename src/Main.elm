@@ -9,7 +9,7 @@ import Debug exposing (log)
 import FormatNumber exposing (format)
 import FormatNumber.Locales exposing (Decimals(..), Locale, usLocale)
 import LeapYear exposing (yearType)
-import BestShuffle exposing (bestShuffle)
+import BestShuffle exposing (bestShuffle, numberOfDifferingCharacters)
 
 
 type alias BestShuffleModel =
@@ -90,10 +90,17 @@ view model =
                     ++ getBestShuffleValidOrNot model
                 )
                 []
-            , text model.bestShuffleModel.bestShuffle
+            , bestShuffleText model
+                |> text
             ]
         ]
 
+bestShuffleText : Model -> String
+bestShuffleText model =  
+    if model.bestShuffleModel.bestShuffle == "" || model.bestShuffleModel.isValid == False then
+        ""
+    else
+        model.bestShuffleModel.bestShuffle ++ " (" ++ String.fromInt model.bestShuffleModel.numDifferingChars ++ ")"
 
 update : Msg -> Model -> Model
 update msg model =
@@ -110,14 +117,21 @@ update msg model =
                 Nothing ->
                     let
                         bestShuffleInvalid bestShuffleModel =
-                            { bestShuffleModel | isValid = False }
+                            { bestShuffleModel |
+                                isValid = False
+                            }
                     in
-                        { model | bestShuffleModel = bestShuffleInvalid (model.bestShuffleModel) }
+                        { model |
+                            bestShuffleModel = bestShuffleInvalid (model.bestShuffleModel)
+                        }
 
                 Just result ->
                     let
                         withBestShuffle bestShuffleModel =
-                            { bestShuffleModel | bestShuffle = result, isValid = True }
+                            { bestShuffleModel |
+                                bestShuffle = result, isValid = True
+                                , numDifferingChars = numberOfDifferingCharacters userInput result
+                            }
                     in
                         { model | bestShuffleModel = withBestShuffle (model.bestShuffleModel) }
 
