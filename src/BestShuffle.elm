@@ -37,4 +37,4 @@ shuffleString originalString =
 
 bestShuffle : String -> Maybe String
 bestShuffle input =
-    Just "ab"
+    Nothing
