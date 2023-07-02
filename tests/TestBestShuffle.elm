@@ -5,7 +5,7 @@ import Fuzz exposing (Fuzzer, int, list, string)
 import String exposing (toList)
 import Test exposing (..)
 import List exposing (map2)
-import BestShuffle exposing (numberOfDifferingCharacters, bestOutOfShuffledStrings)
+import BestShuffle exposing (numberOfDifferingCharacters, bestOutOfShuffledStrings, shuffleString)
 
 
 -- Task
@@ -75,7 +75,17 @@ maxStringDiffSuite =
                     |> Expect.equal "rrrgrrr"
         , test "If all shuffled strings are actually the same, returns the original string" <|
             \_ ->
-                bestOutOfShuffledStrings "grrrrrr" ["grrrrrr","grrrrrr","grrrrrr"]
-                    |> Expect.equal "grrrrrr"
+                bestOutOfShuffledStrings "a" ["a","a","a"]
+                    |> Expect.equal "a"
 
         ]
+
+shuffleStringSuite : Test
+shuffleStringSuite =
+    describe "Given the original string, shuffleString will"
+        [ test "Return a single elem list for words with one letter" <|
+            \_ ->
+                shuffleString "a"
+                    |> Expect.equal ["a"]
+        ]
+

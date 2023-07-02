@@ -1,4 +1,4 @@
-module BestShuffle exposing (numberOfDifferingCharacters, bestOutOfShuffledStrings)
+module BestShuffle exposing (numberOfDifferingCharacters, bestOutOfShuffledStrings, shuffleString)
 import String exposing (toList)
 import List exposing (map2, filter, length)
 import List.Extra exposing (minimumWith)
@@ -28,3 +28,7 @@ bestOutOfShuffledStrings originalString shuffledStrings =
                 originalString
             Just result ->
                 result
+
+shuffleString : String -> List String
+shuffleString originalString =
+    ["b"]
