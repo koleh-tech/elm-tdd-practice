@@ -2,8 +2,9 @@ module TestBestShuffle exposing (..)
 
 import Expect exposing (Expectation)
 import Fuzz exposing (Fuzzer, int, list, string)
+import String exposing (toList)
 import Test exposing (..)
-import BestShuffle exposing (stringDiffScore)
+import BestShuffle exposing (stringDiffScore, differingChars)
 
 
 -- Task
@@ -36,4 +37,12 @@ commonYearSuite =
             \_ ->
                 stringDiffScore "tree" "eetr"
                     |> Expect.equal 0
+        , test "Returns difference list" <|
+            \_ ->
+                let 
+                    in1 = toList "tree" 
+                    in2 = toList "eetr"
+                in
+                differingChars in1 in2
+                    |> Expect.equal [False, False, False, False]
         ]
