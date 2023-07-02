@@ -42,4 +42,8 @@ bestShuffle input =
             |> List.length
             |> (\x -> x > 8)
     in
-    if String.contains " " input || tooLong then Nothing else Just input
+    if String.contains " " input || tooLong
+    then 
+        Nothing
+    else 
+        Just input
