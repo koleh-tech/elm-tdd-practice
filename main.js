@@ -4408,8 +4408,9 @@ var _Bitwise_shiftRightZfBy = F2(function(offset, a)
 	return a >>> offset;
 });
 var $elm$core$Basics$True = {$: 'True'};
+var $author$project$Main$initialBestShuffleModel = {bestShuffle: '', isValid: true, originalWord: ''};
 var $author$project$Main$initialLeapYearModel = {year: 0, yearType: ''};
-var $author$project$Main$initialModel = {celsius: 0, celsiusFieldValid: true, celsiusFieldValue: '0', fahrenheit: 32, fahrenheitFieldValid: true, fahrenheitFieldValue: '32', leapYearModel: $author$project$Main$initialLeapYearModel};
+var $author$project$Main$initialModel = {bestShuffleModel: $author$project$Main$initialBestShuffleModel, celsius: 0, celsiusFieldValid: true, celsiusFieldValue: '0', fahrenheit: 32, fahrenheitFieldValid: true, fahrenheitFieldValue: '32', leapYearModel: $author$project$Main$initialLeapYearModel};
 var $elm$core$Basics$EQ = {$: 'EQ'};
 var $elm$core$Basics$GT = {$: 'GT'};
 var $elm$core$Basics$LT = {$: 'LT'};
@@ -5288,7 +5289,7 @@ var $author$project$Main$update = F2(
 							fahrenheitFieldValid: true
 						});
 				}
-			default:
+			case 'YearClassification':
 				var userInput = msg.a;
 				var updateYearType = function (yearModel) {
 					return _Utils_update(
@@ -5302,6 +5303,9 @@ var $author$project$Main$update = F2(
 					{
 						leapYearModel: updateYearType(model.leapYearModel)
 					});
+			default:
+				var userInput = msg.a;
+				return model;
 		}
 	});
 var $author$project$Main$CelsiusToFahrenheit = function (a) {

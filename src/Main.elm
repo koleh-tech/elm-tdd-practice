@@ -8,6 +8,22 @@ import Debug exposing (log)
 import FormatNumber exposing (format)
 import FormatNumber.Locales exposing (Decimals(..), Locale, usLocale)
 import LeapYear exposing (yearType)
+import BestShuffle exposing (bestShuffle)
+
+
+type alias BestShuffleModel =
+    { originalWord : String
+    , isValid : Bool
+    , bestShuffle : String
+    }
+
+initialBestShuffleModel : BestShuffleModel
+initialBestShuffleModel =
+    { originalWord = ""
+    , isValid = True
+    , bestShuffle  =""
+    }
+
 
 
 type alias LeapYearModel =
@@ -31,6 +47,7 @@ type alias Model =
     , fahrenheitFieldValue : String
     , celsiusFieldValue : String
     , leapYearModel : LeapYearModel
+    , bestShuffleModel : BestShuffleModel
     }
 
 
@@ -43,6 +60,7 @@ initialModel =
     , fahrenheitFieldValue = "32"
     , celsiusFieldValue = "0"
     , leapYearModel = initialLeapYearModel
+    , bestShuffleModel = initialBestShuffleModel
     }
 
 
@@ -50,6 +68,7 @@ type Msg
     = FahreinheitToCelsius String
     | CelsiusToFahrenheit String
     | YearClassification String
+    | BestShuffle String
 
 
 view : Model -> Html Msg
@@ -170,6 +189,8 @@ update msg model =
             let updateYearType yearModel = { yearModel | yearType = yearType userInput } in
             { model | leapYearModel = updateYearType(model.leapYearModel) }
 
+        BestShuffle userInput ->
+            model
 
 fahrenheitToCelsius fahrenheit =
     (fahrenheit - 32) / 1.8
