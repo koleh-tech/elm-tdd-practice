@@ -11,16 +11,16 @@ import BestShuffle exposing (numberOfDifferingCharacters, bestOutOfShuffledStrin
 
 -- Task
 -- Shuffle the characters of a string in such a way that as many of the character values are in a different position as possible.
--- 
+--
 -- Display the result as follows:
--- 
+--
 --   original string, shuffled string, (score)
--- 
+--
 -- The score gives the number of positions whose character value did not change.
--- 
+--
 -- Example
 --   tree, eetr, (0)
--- 
+--
 -- Test cases
 --   abracadabra
 --   seesaw
@@ -28,7 +28,7 @@ import BestShuffle exposing (numberOfDifferingCharacters, bestOutOfShuffledStrin
 --   grrrrrr
 --   up
 --   a
--- 
+--
 -- [Source https://rosettacode.org/wiki/Best_shuffle]
 
 
@@ -38,9 +38,14 @@ stringDiffScoreSuite =
         [ test "if all chars have shifted" <|
             \_ ->
                 let
-                    inputOriginalStrings = ["tree", "elk", "up"]
-                    inputShuffledStrings = ["eetr", "kel", "pu"]
-                    expectedPassingAssertions  = List.length(inputOriginalStrings)
+                    inputOriginalStrings =
+                        [ "tree", "elk", "up" ]
+
+                    inputShuffledStrings =
+                        [ "eetr", "kel", "pu" ]
+
+                    expectedPassingAssertions =
+                        List.length (inputOriginalStrings)
                 in
                     List.map2 numberOfDifferingCharacters inputOriginalStrings inputShuffledStrings
                         |> List.filter (\x -> x == 0)
@@ -53,9 +58,14 @@ stringDiffScoreSuite =
         , test "strings with many overlapping chars will produce same result" <|
             \_ ->
                 let
-                    inputOriginalStrings = ["grrrrrr", "grrrrrr", "grrrrrr"]
-                    inputShuffledStrings = ["rgrrrrr", "rrgrrrr", "rrrgrrr"]
-                    expectedPassingAssertions  = List.length(inputShuffledStrings)
+                    inputOriginalStrings =
+                        [ "grrrrrr", "grrrrrr", "grrrrrr" ]
+
+                    inputShuffledStrings =
+                        [ "rgrrrrr", "rrgrrrr", "rrrgrrr" ]
+
+                    expectedPassingAssertions =
+                        List.length (inputShuffledStrings)
                 in
                     List.map2 numberOfDifferingCharacters inputOriginalStrings inputShuffledStrings
                         |> List.filter (\x -> x == 5)
@@ -63,23 +73,24 @@ stringDiffScoreSuite =
                         |> Expect.equal expectedPassingAssertions
         ]
 
+
 bestOutOfShuffledStringsSuite : Test
 bestOutOfShuffledStringsSuite =
     describe "Given the original string, and a list of shuffled versions of that string"
         [ test "Returns the most shuffled string" <|
             \_ ->
-                bestOutOfShuffledStrings "tree" ["eetr", "eter", "tere"]
+                bestOutOfShuffledStrings "tree" [ "eetr", "eter", "tere" ]
                     |> Expect.equal "eetr"
         , test "If several shuffled strings are just as shuffled, picks last one" <|
             \_ ->
-                bestOutOfShuffledStrings "grrrrrr" ["rgrrrrr", "rrgrrrr", "rrrgrrr"]
+                bestOutOfShuffledStrings "grrrrrr" [ "rgrrrrr", "rrgrrrr", "rrrgrrr" ]
                     |> Expect.equal "rrrgrrr"
         , test "If all shuffled strings are actually the same, returns the original string" <|
             \_ ->
-                bestOutOfShuffledStrings "a" ["a","a","a"]
+                bestOutOfShuffledStrings "a" [ "a", "a", "a" ]
                     |> Expect.equal "a"
-
         ]
+
 
 shuffleStringSuite : Test
 shuffleStringSuite =
@@ -87,7 +98,7 @@ shuffleStringSuite =
         [ test "containing a single element for words with one letter" <|
             \_ ->
                 shuffleString "a"
-                    |> Expect.equal ["a"]
+                    |> Expect.equal [ "a" ]
         , test "including the original string, just once" <|
             \_ ->
                 shuffleString "elk"
@@ -100,6 +111,7 @@ shuffleStringSuite =
                     |> List.length
                     |> Expect.equal 720
         ]
+
 
 bestShuffleErrHandlingSuite : Test
 bestShuffleErrHandlingSuite =
@@ -114,20 +126,20 @@ bestShuffleErrHandlingSuite =
                     |> Expect.equal Nothing
         ]
 
+
 bestShuffleValidSuite : Test
 bestShuffleValidSuite =
     describe "given valid input, bestShuffle will:"
         [ test "return the original input if it is only one character long" <|
             \_ ->
                 bestShuffle "a"
-                    |> Expect.equal(Just "a")
+                    |> Expect.equal (Just "a")
         , test "returns shuffle with the most differing chars" <|
             \_ ->
                 bestShuffle "tree"
-                    |> Expect.equal(Just "eetr")
+                    |> Expect.equal (Just "eetr")
         , test "returns shuffle with the most differing chars, if 6 chars" <|
             \_ ->
                 bestShuffle "123456"
-                    |> Expect.equal(Just "245613")
+                    |> Expect.equal (Just "245613")
         ]
-
