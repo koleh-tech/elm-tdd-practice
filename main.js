@@ -4371,7 +4371,7 @@ function _Browser_load(url)
 	}));
 }
 var $elm$core$Basics$True = {$: 'True'};
-var $author$project$Main$initialBestShuffleModel = {bestShuffle: '', isValid: true, originalWord: ''};
+var $author$project$Main$initialBestShuffleModel = {bestShuffle: '', isValid: true, numDifferingChars: 0, originalWord: ''};
 var $author$project$Main$initialLeapYearModel = {year: 0, yearType: ''};
 var $author$project$Main$initialModel = {bestShuffleModel: $author$project$Main$initialBestShuffleModel, leapYearModel: $author$project$Main$initialLeapYearModel};
 var $elm$core$Basics$EQ = {$: 'EQ'};
@@ -5403,7 +5403,11 @@ var $author$project$Main$update = F2(
 				var withBestShuffle = function (bestShuffleModel) {
 					return _Utils_update(
 						bestShuffleModel,
-						{bestShuffle: result, isValid: true});
+						{
+							bestShuffle: result,
+							isValid: true,
+							numDifferingChars: A2($author$project$BestShuffle$numberOfDifferingCharacters, userInput, result)
+						});
 				};
 				return _Utils_update(
 					model,
@@ -5418,6 +5422,9 @@ var $author$project$Main$BestShuffle = function (a) {
 };
 var $author$project$Main$YearClassification = function (a) {
 	return {$: 'YearClassification', a: a};
+};
+var $author$project$Main$bestShuffleText = function (model) {
+	return ((model.bestShuffleModel.bestShuffle === '') || (!model.bestShuffleModel.isValid)) ? '' : (model.bestShuffleModel.bestShuffle + (' (' + ($elm$core$String$fromInt(model.bestShuffleModel.numDifferingChars) + ')')));
 };
 var $elm$json$Json$Encode$string = _Json_wrap;
 var $elm$html$Html$Attributes$stringProperty = F2(
@@ -5568,7 +5575,7 @@ var $author$project$Main$view = function (model) {
 							]),
 						_List_fromArray(
 							[
-								$elm$html$Html$text('Finds a shuffled version of words with as many differing characters as possible.')
+								$elm$html$Html$text('Gives the best shuffle of a word.')
 							])),
 						A2(
 						$elm$html$Html$label,
@@ -5593,7 +5600,8 @@ var $author$project$Main$view = function (model) {
 								]),
 							$author$project$Main$getBestShuffleValidOrNot(model)),
 						_List_Nil),
-						$elm$html$Html$text(model.bestShuffleModel.bestShuffle)
+						$elm$html$Html$text(
+						$author$project$Main$bestShuffleText(model))
 					]))
 			]));
 };
