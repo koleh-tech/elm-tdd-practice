@@ -30,11 +30,16 @@ import BestShuffle exposing (stringDiffScore)
 -- [Source https://rosettacode.org/wiki/Best_shuffle]
 
 
-commonYearSuite : Test
-commonYearSuite =
-    describe "Years are common years if"
-        [ test "They are divisible by 100" <|
+stringDiffScoreSuite : Test
+stringDiffScoreSuite =
+    describe "stringDiffScore, returns 0 if"
+        [ test "if all chars have shifted" <|
             \_ ->
                 stringDiffScore "tree" "eetr"
                     |> Expect.equal 0
+        , test "returns 1 if one char hasn't shifted" <|
+            \_ ->
+                stringDiffScore "tree" "eter"
+                    |> Expect.equal 0
+
         ]
