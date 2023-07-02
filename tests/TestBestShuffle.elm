@@ -103,10 +103,14 @@ shuffleStringSuite =
 
 bestShuffleErrHandlingSuite : Test
 bestShuffleErrHandlingSuite =
-    describe "bestShuffle will return Nothing if"
-        [ test "the input string contains spaces" <|
+    describe "bestShuffle will return Nothing if the input"
+        [ test "contains spaces" <|
             \_ ->
                 bestShuffle "a b"
+                    |> Expect.equal Nothing
+        , test "is more than 8 chars long" <|
+            \_ ->
+                bestShuffle "123456789"
                     |> Expect.equal Nothing
         ]
 
