@@ -22,5 +22,5 @@ jobs:
   deploy:
     needs: build
     steps:
-      - uses: actions/upload-pages-artifact
+      - uses: actions/upload-pages-artifact@v3
       - name: deploy the web app
