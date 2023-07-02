@@ -1,4 +1,4 @@
-module BestShuffle exposing (stringDiffScore, bestShuffledString)
+module BestShuffle exposing (stringDiffScore, bestOutOfShuffledStrings)
 import String exposing (toList)
 import List exposing (map2, filter, length)
 
@@ -13,6 +13,6 @@ stringDiffScore originalString shuffledString =
         |> filter (\match -> match)
         |> length
         
-bestShuffledString : String -> List String -> String
-bestShuffledString originalString shuffledStrings =
-    "eer"
+bestOutOfShuffledStrings : String -> List String -> String
+bestOutOfShuffledStrings originalString shuffledStrings =
+    "eetr"

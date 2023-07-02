@@ -5,7 +5,7 @@ import Fuzz exposing (Fuzzer, int, list, string)
 import String exposing (toList)
 import Test exposing (..)
 import List exposing (map2)
-import BestShuffle exposing (stringDiffScore, bestShuffledString)
+import BestShuffle exposing (stringDiffScore, bestOutOfShuffledStrings)
 
 
 -- Task
@@ -67,10 +67,7 @@ maxStringDiffSuite =
     describe "Given the original string, and a list of shuffled versions of that string"
         [ test "Returns the most shuffled string" <|
             \_ ->
-                let
-                    inputShuffledStrings = ["eetr", "eter", "tere"]
-                in
-                    bestShuffledString "tree" inputShuffledStrings
-                        |> Expect.equal "eetr"
+                bestOutOfShuffledStrings "tree" ["eetr", "eter", "tere"]
+                    |> Expect.equal "eetr"
         ]
 
