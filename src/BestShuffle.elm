@@ -1,13 +1,14 @@
 module BestShuffle exposing (numberOfDifferingCharacters, bestOutOfShuffledStrings, shuffleString)
-import String exposing (toList)
-import List exposing (map2, filter, length)
+import String
+import List exposing (map, map2, filter, length)
 import List.Extra exposing (minimumWith)
+import Permutations 
 
 numberOfDifferingCharacters : String -> String -> Int
 numberOfDifferingCharacters originalString shuffledString =
     let 
-        originalStringChars = toList originalString
-        shuffledStringChars = toList shuffledString
+        originalStringChars = String.toList originalString
+        shuffledStringChars = String.toList shuffledString
         charactersMatch = (\char1 char2 -> char1 == char2)
     in
     map2 charactersMatch originalStringChars shuffledStringChars
@@ -31,4 +32,8 @@ bestOutOfShuffledStrings originalString shuffledStrings =
 
 shuffleString : String -> List String
 shuffleString originalString =
-    if originalString == "a" then ["a"] else ["ab", "ba"]
+    let 
+        input = String.toList originalString
+    in
+    Permutations.ofList input
+        |> map (\x -> String.fromList x)
