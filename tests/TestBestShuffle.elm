@@ -120,12 +120,15 @@ bestShuffleValidSuite =
         [ test "return the original input if it is only one character long" <|
             \_ ->
                 bestShuffle "a"
-                    |> (\x -> x == Just "a")
-                    |> Expect.equal True
-        , test "is more than 8 chars long" <|
+                    |> Expect.equal(Just "a")
+        , test "returns shuffle with the most differing chars" <|
             \_ ->
                 bestShuffle "tree"
-                    |> (\x -> x == Just "eetr")
-                    |> Expect.equal True
+                    |> Expect.equal(Just "eetr")
+        -- , test "takes a while for long words" <|
+        --     \_ ->
+        --         bestShuffle "12345678"
+        --             |> (\x -> x == Just "eetr")
+        --             |> Expect.equal True
         ]
 
