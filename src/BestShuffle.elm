@@ -1,33 +1,44 @@
 module BestShuffle exposing (numberOfDifferingCharacters, bestOutOfShuffledStrings, shuffleString, bestShuffle)
+
 import String
 import List exposing (map, map2, filter, length)
 import List.Extra exposing (minimumWith)
-import Permutations 
+import Permutations
+
 
 numberOfDifferingCharacters : String -> String -> Int
 numberOfDifferingCharacters originalString shuffledString =
-    let 
-        shuffledStringChars = String.toList shuffledString
+    let
+        shuffledStringChars =
+            String.toList shuffledString
     in
-    String.toList originalString
-        |> map2 (\char1 char2 -> char1 == char2) shuffledStringChars
-        |> filter (\match -> match)
-        |> length
-        
+        String.toList originalString
+            |> map2 (\char1 char2 -> char1 == char2) shuffledStringChars
+            |> filter (\match -> match)
+            |> length
+
+
 bestOutOfShuffledStrings : String -> List String -> String
 bestOutOfShuffledStrings originalString shuffledStrings =
     let
-        differenceFromOriginal = numberOfDifferingCharacters originalString
-        compareStrings = (\s1 s2 ->
-            if differenceFromOriginal(s1) > differenceFromOriginal(s2)
-            then GT else LT
+        differenceFromOriginal =
+            numberOfDifferingCharacters originalString
+
+        compareStrings =
+            (\s1 s2 ->
+                if differenceFromOriginal (s1) > differenceFromOriginal (s2) then
+                    GT
+                else
+                    LT
             )
     in
         case minimumWith compareStrings shuffledStrings of
             Nothing ->
                 originalString
+
             Just result ->
                 result
+
 
 shuffleString : String -> List String
 shuffleString originalString =
@@ -35,17 +46,18 @@ shuffleString originalString =
         |> Permutations.ofList
         |> map (\x -> String.fromList x)
 
+
 bestShuffle : String -> Maybe String
 bestShuffle input =
     let
-        tooLong = String.toList input 
-            |> List.length
-            |> (\x -> x > 8)
+        tooLong =
+            String.toList input
+                |> List.length
+                |> (\x -> x > 8)
     in
-    if String.contains " " input || tooLong
-    then 
-        Nothing
-    else 
-        shuffleString input
-            |> bestOutOfShuffledStrings input
-            |> Just 
+        if String.contains " " input || tooLong then
+            Nothing
+        else
+            shuffleString input
+                |> bestOutOfShuffledStrings input
+                |> Just

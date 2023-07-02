@@ -1,4 +1,5 @@
 module Main exposing (..)
+
 import Browser
 import Html exposing (Html, div, text, input, section, h1, h2, label)
 import Html.Events exposing (onInput)
@@ -17,13 +18,13 @@ type alias BestShuffleModel =
     , bestShuffle : String
     }
 
+
 initialBestShuffleModel : BestShuffleModel
 initialBestShuffleModel =
     { originalWord = ""
     , isValid = True
-    , bestShuffle  =""
+    , bestShuffle = ""
     }
-
 
 
 type alias LeapYearModel =
@@ -40,16 +41,14 @@ initialLeapYearModel =
 
 
 type alias Model =
-    {
-    leapYearModel : LeapYearModel
+    { leapYearModel : LeapYearModel
     , bestShuffleModel : BestShuffleModel
     }
 
 
 initialModel : Model
 initialModel =
-    {
-    leapYearModel = initialLeapYearModel
+    { leapYearModel = initialLeapYearModel
     , bestShuffleModel = initialBestShuffleModel
     }
 
@@ -62,8 +61,7 @@ type Msg
 view : Model -> Html Msg
 view model =
     section [ class "section" ]
-        [
-        div [ class "container" ]
+        [ div [ class "container" ]
             [ h1 [ class "title" ] [ text "Leap year classifier" ]
             , h2 [ class "subtitle" ] [ text "Determine if year is leap year" ]
             , label [ for "Year", class "label" ] [ text "Year:" ]
@@ -99,17 +97,28 @@ update : Msg -> Model -> Model
 update msg model =
     case msg of
         YearClassification userInput ->
-            let updateYearType yearModel = { yearModel | yearType = yearType userInput } in
-            { model | leapYearModel = updateYearType(model.leapYearModel) }
+            let
+                updateYearType yearModel =
+                    { yearModel | yearType = yearType userInput }
+            in
+                { model | leapYearModel = updateYearType (model.leapYearModel) }
 
         BestShuffle userInput ->
             case bestShuffle userInput of
                 Nothing ->
-                    let bestShuffleInvalid bestShuffleModel = { bestShuffleModel | isValid = False } in
-                    { model | bestShuffleModel = bestShuffleInvalid(model.bestShuffleModel) }
+                    let
+                        bestShuffleInvalid bestShuffleModel =
+                            { bestShuffleModel | isValid = False }
+                    in
+                        { model | bestShuffleModel = bestShuffleInvalid (model.bestShuffleModel) }
+
                 Just result ->
-                    let withBestShuffle bestShuffleModel = { bestShuffleModel | bestShuffle = result, isValid = True } in
-                    { model | bestShuffleModel = withBestShuffle(model.bestShuffleModel) }
+                    let
+                        withBestShuffle bestShuffleModel =
+                            { bestShuffleModel | bestShuffle = result, isValid = True }
+                    in
+                        { model | bestShuffleModel = withBestShuffle (model.bestShuffleModel) }
+
 
 getBestShuffleValidOrNot : Model -> List (Html.Attribute msg)
 getBestShuffleValidOrNot model =
@@ -117,7 +126,6 @@ getBestShuffleValidOrNot model =
         [ class "input" ]
     else
         [ class "input is-danger" ]
-
 
 
 main : Program () Model Msg

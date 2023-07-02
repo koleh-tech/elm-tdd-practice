@@ -1,4 +1,5 @@
 module LeapYear exposing (isLeapYear, yearType)
+
 import String
 
 
@@ -29,10 +30,10 @@ yearType year =
         convertedYear =
             convertUserInput year
     in
-    if convertedYear >= 0 then
-        if isLeapYear convertedYear == True then
-            "Leap year"
+        if convertedYear >= 0 then
+            if isLeapYear convertedYear == True then
+                "Leap year"
+            else
+                "Common year"
         else
-            "Common year"
-    else
-        "Not a valid year"
+            "Not a valid year"
