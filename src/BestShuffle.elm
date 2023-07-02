@@ -37,4 +37,9 @@ shuffleString originalString =
 
 bestShuffle : String -> Maybe String
 bestShuffle input =
-    if String.contains " " input then Nothing else Just input
+    let
+        tooLong = String.toList input 
+            |> List.length
+            |> (\x -> x > 8)
+    in
+    if String.contains " " input || tooLong then Nothing else Just input
