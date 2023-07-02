@@ -20,7 +20,7 @@ jobs:
         docker run -t my-ubuntu-image make
 
   deploy:
-    needs:
+    needs: build
     steps:
       - uses: actions/upload-pages-artifact
       - name: deploy the web app
