@@ -40,6 +40,6 @@ stringDiffScoreSuite =
         , test "returns 1 if one char hasn't shifted" <|
             \_ ->
                 stringDiffScore "tree" "eter"
-                    |> Expect.equal 0
+                    |> Expect.equal 1
 
         ]
