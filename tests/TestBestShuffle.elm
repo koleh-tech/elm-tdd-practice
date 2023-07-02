@@ -108,9 +108,9 @@ bestShuffleErrHandlingSuite =
             \_ ->
                 bestShuffle "a b"
                     |> Expect.equal Nothing
-        , test "is more than 6 chars long" <|
+        , test "is more than 8 chars long" <|
             \_ ->
-                bestShuffle "1234567"
+                bestShuffle "123456789"
                     |> Expect.equal Nothing
         ]
 

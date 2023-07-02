@@ -5374,7 +5374,7 @@ var $author$project$BestShuffle$shuffleString = function (originalString) {
 };
 var $author$project$BestShuffle$bestShuffle = function (input) {
 	var tooLong = function (x) {
-		return x > 6;
+		return x > 8;
 	}(
 		$elm$core$List$length(
 			$elm$core$String$toList(input)));

@@ -40,7 +40,7 @@ bestShuffle input =
     let
         tooLong = String.toList input 
             |> List.length
-            |> (\x -> x > 6)
+            |> (\x -> x > 8)
     in
     if String.contains " " input || tooLong
     then 
