@@ -74,33 +74,8 @@ type Msg
 view : Model -> Html Msg
 view model =
     section [ class "section" ]
-        [ div [ class "container" ]
-            [ h1 [ class "title" ] [ text "Temperature Converter" ]
-            , h2 [ class "subtitle" ] [ text "Converting from Fahrenheit to Celsius" ]
-            , label [ for "Fahrenheit", class "label" ] [ text "Fahrenheit:" ]
-            , input
-                ([ name "Fahrenheit"
-                 , class "input"
-                 , type_ "text"
-                 , onInput FahreinheitToCelsius
-                 , value (viewFahrenheit model)
-                 ]
-                    ++ getFahrenheitFieldValidOrNot model
-                )
-                []
-            , label [ for "Celsius", class "label" ] [ text "Celsius:" ]
-            , input
-                ([ name "Celsius"
-                 , class "input"
-                 , type_ "text"
-                 , onInput CelsiusToFahrenheit
-                 , value (viewCelsius model)
-                 ]
-                    ++ getCelsiusFieldValidOrNot model
-                )
-                []
-            ]
-        , div [ class "container" ]
+        [
+        div [ class "container" ]
             [ h1 [ class "title" ] [ text "Leap year classifier" ]
             , h2 [ class "subtitle" ] [ text "Determine if year is leap year" ]
             , label [ for "Year", class "label" ] [ text "Year:" ]
