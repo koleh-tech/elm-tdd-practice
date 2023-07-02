@@ -7,20 +7,19 @@ import Permutations
 numberOfDifferingCharacters : String -> String -> Int
 numberOfDifferingCharacters originalString shuffledString =
     let 
-        originalStringChars = String.toList originalString
         shuffledStringChars = String.toList shuffledString
-        charactersMatch = (\char1 char2 -> char1 == char2)
     in
-    map2 charactersMatch originalStringChars shuffledStringChars
+    String.toList originalString
+        |> map2 (\char1 char2 -> char1 == char2) shuffledStringChars
         |> filter (\match -> match)
         |> length
         
 bestOutOfShuffledStrings : String -> List String -> String
 bestOutOfShuffledStrings originalString shuffledStrings =
     let
-        differingCharactersFromOriginalString = numberOfDifferingCharacters originalString
-        compareStrings = (\str1 str2 ->
-            if differingCharactersFromOriginalString(str1) > differingCharactersFromOriginalString(str2)
+        differenceFromOriginal = numberOfDifferingCharacters originalString
+        compareStrings = (\s1 s2 ->
+            if differenceFromOriginal(s1) > differenceFromOriginal(s2)
             then GT else LT
             )
     in
@@ -32,8 +31,6 @@ bestOutOfShuffledStrings originalString shuffledStrings =
 
 shuffleString : String -> List String
 shuffleString originalString =
-    let 
-        input = String.toList originalString
-    in
-    Permutations.ofList input
+    String.toList originalString
+        |> Permutations.ofList
         |> map (\x -> String.fromList x)
