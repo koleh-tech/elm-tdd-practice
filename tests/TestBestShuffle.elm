@@ -83,16 +83,18 @@ maxStringDiffSuite =
 
 shuffleStringSuite : Test
 shuffleStringSuite =
-    describe "Given the original string, shuffleString will"
-        [ test "return a single elem list for words with one letter" <|
+    describe "Given the original string, shuffleString will return a list"
+        [ test "containing a single element for words with one letter" <|
             \_ ->
                 shuffleString "a"
                     |> Expect.equal ["a"]
-        , test "include the original in its list" <|
+        , test "including the original string, just once" <|
             \_ ->
-                shuffleString "ab"
-                    |> Expect.equal ["ab", "ba"]
-        , test "return all permutations of chars in the original string" <|
+                shuffleString "elk"
+                    |> List.filter (\x -> x == "elk")
+                    |> List.length
+                    |> Expect.equal 1
+        , test "with length equal to possible permutations of chars in the original string" <|
             \_ ->
                 shuffleString "seesaw"
                     |> List.length
