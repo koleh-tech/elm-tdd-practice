@@ -124,6 +124,7 @@ view model =
                  , type_ "text"
                  , onInput BestShuffle
                  ]
+                    ++ getBestShuffleValidOrNot model
                 )
                 []
             , text model.bestShuffleModel.bestShuffle
@@ -203,7 +204,22 @@ update msg model =
             { model | leapYearModel = updateYearType(model.leapYearModel) }
 
         BestShuffle userInput ->
-            model
+            case bestShuffle userInput of
+                Nothing ->
+                    let bestShuffleInvalid bestShuffleModel = { bestShuffleModel | isValid = False } in
+                    { model | bestShuffleModel = bestShuffleInvalid(model.bestShuffleModel) }
+                Just result ->
+                    let withBestShuffle bestShuffleModel = { bestShuffleModel | bestShuffle = result, isValid = True } in
+                    { model | bestShuffleModel = withBestShuffle(model.bestShuffleModel) }
+
+getBestShuffleValidOrNot : Model -> List (Html.Attribute msg)
+getBestShuffleValidOrNot model =
+    if model.bestShuffleModel.isValid == True then
+        [ class "input" ]
+    else
+        [ class "input is-danger" ]
+
+
 
 fahrenheitToCelsius fahrenheit =
     (fahrenheit - 32) / 1.8

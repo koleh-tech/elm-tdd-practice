@@ -5220,6 +5220,170 @@ var $elm$browser$Browser$sandbox = function (impl) {
 			view: impl.view
 		});
 };
+var $elm_community$list_extra$List$Extra$foldl1 = F2(
+	function (func, list) {
+		if (!list.b) {
+			return $elm$core$Maybe$Nothing;
+		} else {
+			var x = list.a;
+			var xs = list.b;
+			return $elm$core$Maybe$Just(
+				A3($elm$core$List$foldl, func, x, xs));
+		}
+	});
+var $elm_community$list_extra$List$Extra$minimumWith = F2(
+	function (comparator, list) {
+		return A2(
+			$elm_community$list_extra$List$Extra$foldl1,
+			F2(
+				function (x, y) {
+					var _v0 = A2(comparator, x, y);
+					if (_v0.$ === 'LT') {
+						return x;
+					} else {
+						return y;
+					}
+				}),
+			list);
+	});
+var $elm$core$List$filter = F2(
+	function (isGood, list) {
+		return A3(
+			$elm$core$List$foldr,
+			F2(
+				function (x, xs) {
+					return isGood(x) ? A2($elm$core$List$cons, x, xs) : xs;
+				}),
+			_List_Nil,
+			list);
+	});
+var $elm$core$String$foldr = _String_foldr;
+var $elm$core$String$toList = function (string) {
+	return A3($elm$core$String$foldr, $elm$core$List$cons, _List_Nil, string);
+};
+var $author$project$BestShuffle$numberOfDifferingCharacters = F2(
+	function (originalString, shuffledString) {
+		var shuffledStringChars = $elm$core$String$toList(shuffledString);
+		return $elm$core$List$length(
+			A2(
+				$elm$core$List$filter,
+				function (match) {
+					return match;
+				},
+				A3(
+					$elm$core$List$map2,
+					F2(
+						function (char1, char2) {
+							return _Utils_eq(char1, char2);
+						}),
+					shuffledStringChars,
+					$elm$core$String$toList(originalString))));
+	});
+var $author$project$BestShuffle$bestOutOfShuffledStrings = F2(
+	function (originalString, shuffledStrings) {
+		var differenceFromOriginal = $author$project$BestShuffle$numberOfDifferingCharacters(originalString);
+		var compareStrings = F2(
+			function (s1, s2) {
+				return (_Utils_cmp(
+					differenceFromOriginal(s1),
+					differenceFromOriginal(s2)) > 0) ? $elm$core$Basics$GT : $elm$core$Basics$LT;
+			});
+		var _v0 = A2($elm_community$list_extra$List$Extra$minimumWith, compareStrings, shuffledStrings);
+		if (_v0.$ === 'Nothing') {
+			return originalString;
+		} else {
+			var result = _v0.a;
+			return result;
+		}
+	});
+var $elm$core$String$fromList = _String_fromList;
+var $elm$core$Basics$composeR = F3(
+	function (f, g, x) {
+		return g(
+			f(x));
+	});
+var $itamargiv$permutations$Permutations$interleave = F3(
+	function (_v0, list, init) {
+		var n = _v0.a;
+		var base = _v0.b;
+		var interim = F3(
+			function (transform, current, acc) {
+				if (!current.b) {
+					return _Utils_Tuple2(base, acc);
+				} else {
+					var x = current.a;
+					var xs = current.b;
+					var _v2 = A3(
+						interim,
+						A2(
+							$elm$core$Basics$composeR,
+							transform,
+							$elm$core$List$cons(x)),
+						xs,
+						acc);
+					var iBase = _v2.a;
+					var iAcc = _v2.b;
+					return _Utils_Tuple2(
+						A2($elm$core$List$cons, x, iBase),
+						A2(
+							$elm$core$List$cons,
+							transform(
+								A2(
+									$elm$core$List$cons,
+									n,
+									A2($elm$core$List$cons, x, iBase))),
+							iAcc));
+				}
+			});
+		var _v3 = A3(interim, $elm$core$Basics$identity, list, init);
+		var result = _v3.b;
+		return result;
+	});
+var $itamargiv$permutations$Permutations$ofList = function (list) {
+	var permute = F2(
+		function (interim, base) {
+			if (!interim.b) {
+				return _List_Nil;
+			} else {
+				var x = interim.a;
+				var xs = interim.b;
+				return A3(
+					$elm$core$List$foldr,
+					$itamargiv$permutations$Permutations$interleave(
+						_Utils_Tuple2(x, xs)),
+					A2(
+						permute,
+						xs,
+						A2($elm$core$List$cons, x, base)),
+					$itamargiv$permutations$Permutations$ofList(base));
+			}
+		});
+	return A2(
+		$elm$core$List$cons,
+		list,
+		A2(permute, list, _List_Nil));
+};
+var $author$project$BestShuffle$shuffleString = function (originalString) {
+	return A2(
+		$elm$core$List$map,
+		function (x) {
+			return $elm$core$String$fromList(x);
+		},
+		$itamargiv$permutations$Permutations$ofList(
+			$elm$core$String$toList(originalString)));
+};
+var $author$project$BestShuffle$bestShuffle = function (input) {
+	var tooLong = function (x) {
+		return x > 6;
+	}(
+		$elm$core$List$length(
+			$elm$core$String$toList(input)));
+	return (A2($elm$core$String$contains, ' ', input) || tooLong) ? $elm$core$Maybe$Nothing : $elm$core$Maybe$Just(
+		A2(
+			$author$project$BestShuffle$bestOutOfShuffledStrings,
+			input,
+			$author$project$BestShuffle$shuffleString(input)));
+};
 var $author$project$Main$celsiusToFahrenheit = function (celsius) {
 	return (celsius - 1.8) / 32;
 };
@@ -5305,7 +5469,31 @@ var $author$project$Main$update = F2(
 					});
 			default:
 				var userInput = msg.a;
-				return model;
+				var _v3 = $author$project$BestShuffle$bestShuffle(userInput);
+				if (_v3.$ === 'Nothing') {
+					var bestShuffleInvalid = function (bestShuffleModel) {
+						return _Utils_update(
+							bestShuffleModel,
+							{isValid: false});
+					};
+					return _Utils_update(
+						model,
+						{
+							bestShuffleModel: bestShuffleInvalid(model.bestShuffleModel)
+						});
+				} else {
+					var result = _v3.a;
+					var withBestShuffle = function (bestShuffleModel) {
+						return _Utils_update(
+							bestShuffleModel,
+							{bestShuffle: result, isValid: true});
+					};
+					return _Utils_update(
+						model,
+						{
+							bestShuffleModel: withBestShuffle(model.bestShuffleModel)
+						});
+				}
 		}
 	});
 var $author$project$Main$BestShuffle = function (a) {
@@ -5331,6 +5519,15 @@ var $elm$html$Html$Attributes$stringProperty = F2(
 var $elm$html$Html$Attributes$class = $elm$html$Html$Attributes$stringProperty('className');
 var $elm$html$Html$div = _VirtualDom_node('div');
 var $elm$html$Html$Attributes$for = $elm$html$Html$Attributes$stringProperty('htmlFor');
+var $author$project$Main$getBestShuffleValidOrNot = function (model) {
+	return model.bestShuffleModel.isValid ? _List_fromArray(
+		[
+			$elm$html$Html$Attributes$class('input')
+		]) : _List_fromArray(
+		[
+			$elm$html$Html$Attributes$class('input is-danger')
+		]);
+};
 var $author$project$Main$getCelsiusFieldValidOrNot = function (model) {
 	return model.celsiusFieldValid ? _List_fromArray(
 		[
@@ -5524,10 +5721,6 @@ var $elm$core$List$any = F2(
 			}
 		}
 	});
-var $elm$core$String$foldr = _String_foldr;
-var $elm$core$String$toList = function (string) {
-	return A3($elm$core$String$foldr, $elm$core$List$cons, _List_Nil, string);
-};
 var $myrho$elm_round$Round$addSign = F2(
 	function (signed, str) {
 		var isNotZero = A2(
@@ -6114,13 +6307,15 @@ var $author$project$Main$view = function (model) {
 							])),
 						A2(
 						$elm$html$Html$input,
-						_List_fromArray(
-							[
-								$elm$html$Html$Attributes$name('ToShuffle'),
-								$elm$html$Html$Attributes$class('input'),
-								$elm$html$Html$Attributes$type_('text'),
-								$elm$html$Html$Events$onInput($author$project$Main$BestShuffle)
-							]),
+						_Utils_ap(
+							_List_fromArray(
+								[
+									$elm$html$Html$Attributes$name('ToShuffle'),
+									$elm$html$Html$Attributes$class('input'),
+									$elm$html$Html$Attributes$type_('text'),
+									$elm$html$Html$Events$onInput($author$project$Main$BestShuffle)
+								]),
+							$author$project$Main$getBestShuffleValidOrNot(model)),
 						_List_Nil),
 						$elm$html$Html$text(model.bestShuffleModel.bestShuffle)
 					]))
