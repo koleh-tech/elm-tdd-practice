@@ -17,9 +17,9 @@ numberOfDifferingCharacters originalString shuffledString =
 bestOutOfShuffledStrings : String -> List String -> String
 bestOutOfShuffledStrings originalString shuffledStrings =
     let
-        diffFromOriginalString = numberOfDifferingCharacters originalString
+        differingCharactersFromOriginalString = numberOfDifferingCharacters originalString
         compareStrings = (\str1 str2 ->
-            if diffFromOriginalString(str1) > diffFromOriginalString(str2)
+            if differingCharactersFromOriginalString(str1) > differingCharactersFromOriginalString(str2)
             then GT else LT
             )
     in
