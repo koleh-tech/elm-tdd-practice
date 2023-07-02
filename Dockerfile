@@ -1,11 +1,12 @@
 # Use the Manjaro base image
-FROM manjarolinux/base:latest
+FROM ubuntu:latest
+
 
 # Update the package lists
-RUN pacman --noconfirm -Syu
+RUN apt-get update
 
 # Install necessary packages
-RUN pacman --noconfirm -S npm make
+RUN apt-get -y install npm make
 RUN npm install --global elm elm-live@next elm-format elm-test 
 
 # Set the working directory
