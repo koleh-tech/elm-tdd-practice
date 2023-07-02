@@ -105,22 +105,6 @@ view model =
         ]
 
 
-getFahrenheitFieldValidOrNot : Model -> List (Html.Attribute msg)
-getFahrenheitFieldValidOrNot model =
-    if model.fahrenheitFieldValid == True then
-        [ class "input" ]
-    else
-        [ class "input is-danger" ]
-
-
-getCelsiusFieldValidOrNot : Model -> List (Html.Attribute msg)
-getCelsiusFieldValidOrNot model =
-    if model.celsiusFieldValid == True then
-        [ class "input" ]
-    else
-        [ class "input is-danger" ]
-
-
 update : Msg -> Model -> Model
 update msg model =
     case msg of
@@ -144,14 +128,6 @@ getBestShuffleValidOrNot model =
     else
         [ class "input is-danger" ]
 
-
-
-fahrenheitToCelsius fahrenheit =
-    (fahrenheit - 32) / 1.8
-
-
-celsiusToFahrenheit celsius =
-    (celsius - 1.8) / 32
 
 
 main : Program () Model Msg
