@@ -110,10 +110,23 @@ view model =
                  , type_ "text"
                  , onInput YearClassification
                  ]
-                    ++ getFahrenheitFieldValidOrNot model
                 )
                 []
             , text model.leapYearModel.yearType
+            ]
+        , div [ class "container" ]
+            [ h1 [ class "title" ] [ text "Best shuffle" ]
+            , h2 [ class "subtitle" ] [ text "Gives the best shuffle of a word" ]
+            , label [ for "ToShuffle", class "label" ] [ text "Word to shuffle:" ]
+            , input
+                ([ name "ToShuffle"
+                 , class "input"
+                 , type_ "text"
+                 , onInput BestShuffle
+                 ]
+                )
+                []
+            , text model.bestShuffleModel.bestShuffle
             ]
         ]
 

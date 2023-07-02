@@ -5308,6 +5308,9 @@ var $author$project$Main$update = F2(
 				return model;
 		}
 	});
+var $author$project$Main$BestShuffle = function (a) {
+	return {$: 'BestShuffle', a: a};
+};
 var $author$project$Main$CelsiusToFahrenheit = function (a) {
 	return {$: 'CelsiusToFahrenheit', a: a};
 };
@@ -6060,17 +6063,66 @@ var $author$project$Main$view = function (model) {
 							])),
 						A2(
 						$elm$html$Html$input,
-						_Utils_ap(
-							_List_fromArray(
-								[
-									$elm$html$Html$Attributes$name('Year'),
-									$elm$html$Html$Attributes$class('input'),
-									$elm$html$Html$Attributes$type_('text'),
-									$elm$html$Html$Events$onInput($author$project$Main$YearClassification)
-								]),
-							$author$project$Main$getFahrenheitFieldValidOrNot(model)),
+						_List_fromArray(
+							[
+								$elm$html$Html$Attributes$name('Year'),
+								$elm$html$Html$Attributes$class('input'),
+								$elm$html$Html$Attributes$type_('text'),
+								$elm$html$Html$Events$onInput($author$project$Main$YearClassification)
+							]),
 						_List_Nil),
 						$elm$html$Html$text(model.leapYearModel.yearType)
+					])),
+				A2(
+				$elm$html$Html$div,
+				_List_fromArray(
+					[
+						$elm$html$Html$Attributes$class('container')
+					]),
+				_List_fromArray(
+					[
+						A2(
+						$elm$html$Html$h1,
+						_List_fromArray(
+							[
+								$elm$html$Html$Attributes$class('title')
+							]),
+						_List_fromArray(
+							[
+								$elm$html$Html$text('Best shuffle')
+							])),
+						A2(
+						$elm$html$Html$h2,
+						_List_fromArray(
+							[
+								$elm$html$Html$Attributes$class('subtitle')
+							]),
+						_List_fromArray(
+							[
+								$elm$html$Html$text('Gives the best shuffle of a word')
+							])),
+						A2(
+						$elm$html$Html$label,
+						_List_fromArray(
+							[
+								$elm$html$Html$Attributes$for('ToShuffle'),
+								$elm$html$Html$Attributes$class('label')
+							]),
+						_List_fromArray(
+							[
+								$elm$html$Html$text('Word to shuffle:')
+							])),
+						A2(
+						$elm$html$Html$input,
+						_List_fromArray(
+							[
+								$elm$html$Html$Attributes$name('ToShuffle'),
+								$elm$html$Html$Attributes$class('input'),
+								$elm$html$Html$Attributes$type_('text'),
+								$elm$html$Html$Events$onInput($author$project$Main$BestShuffle)
+							]),
+						_List_Nil),
+						$elm$html$Html$text(model.bestShuffleModel.bestShuffle)
 					]))
 			]));
 };
