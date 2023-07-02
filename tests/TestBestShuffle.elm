@@ -6,7 +6,7 @@ import String exposing (toList)
 import Test exposing (..)
 import List exposing (map2)
 import List.Extra exposing (permutations)
-import BestShuffle exposing (numberOfDifferingCharacters, bestOutOfShuffledStrings, shuffleString)
+import BestShuffle exposing (numberOfDifferingCharacters, bestOutOfShuffledStrings, shuffleString, bestShuffle)
 
 
 -- Task
@@ -63,8 +63,8 @@ stringDiffScoreSuite =
                         |> Expect.equal expectedPassingAssertions
         ]
 
-maxStringDiffSuite : Test
-maxStringDiffSuite =
+bestOutOfShuffledStringsSuite : Test
+bestOutOfShuffledStringsSuite =
     describe "Given the original string, and a list of shuffled versions of that string"
         [ test "Returns the most shuffled string" <|
             \_ ->
@@ -99,5 +99,14 @@ shuffleStringSuite =
                 shuffleString "seesaw"
                     |> List.length
                     |> Expect.equal 720
+        ]
+
+bestShuffleSuite : Test
+bestShuffleSuite =
+    describe "bestShuffle will return Nothing if"
+        [ test "the input string contains spaces" <|
+            \_ ->
+                bestShuffle "a b"
+                    |> Expect.equal Nothing
         ]
 
