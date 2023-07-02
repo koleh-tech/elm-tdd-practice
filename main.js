@@ -5424,7 +5424,7 @@ var $author$project$Main$YearClassification = function (a) {
 	return {$: 'YearClassification', a: a};
 };
 var $author$project$Main$bestShuffleText = function (model) {
-	return ((model.bestShuffleModel.bestShuffle === '') || (!model.bestShuffleModel.isValid)) ? '' : (model.bestShuffleModel.bestShuffle + (' (' + ($elm$core$String$fromInt(model.bestShuffleModel.numDifferingChars) + ')')));
+	return ((model.bestShuffleModel.bestShuffle === '') || (!model.bestShuffleModel.isValid)) ? '' : (model.bestShuffleModel.bestShuffle + (' (' + ($elm$core$String$fromInt(model.bestShuffleModel.numDifferingChars) + ']')));
 };
 var $elm$json$Json$Encode$string = _Json_wrap;
 var $elm$html$Html$Attributes$stringProperty = F2(

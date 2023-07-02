@@ -45,7 +45,7 @@ leapYearSuite =
             \_ ->
                 let
                     input =
-                        [ 400, 2000, 1900, 1996 ]
+                        [ 400, 2000, 1900, 1994 ]
                 in
                     List.map isLeapYear input
                         |> List.filter (\x -> x == True)

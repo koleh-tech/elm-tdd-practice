@@ -100,7 +100,7 @@ bestShuffleText model =
     if model.bestShuffleModel.bestShuffle == "" || model.bestShuffleModel.isValid == False then
         ""
     else
-        model.bestShuffleModel.bestShuffle ++ " (" ++ String.fromInt model.bestShuffleModel.numDifferingChars ++ ")"
+        model.bestShuffleModel.bestShuffle ++ " (" ++ String.fromInt model.bestShuffleModel.numDifferingChars ++ "]"
 
 update : Msg -> Model -> Model
 update msg model =
