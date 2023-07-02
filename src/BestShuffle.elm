@@ -46,4 +46,6 @@ bestShuffle input =
     then 
         Nothing
     else 
-        Just input
+        shuffleString input
+            |> bestOutOfShuffledStrings input
+            |> Just 
