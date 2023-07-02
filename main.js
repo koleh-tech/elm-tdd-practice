@@ -5347,13 +5347,6 @@ var $author$project$BestShuffle$bestShuffle = function (input) {
 			input,
 			$author$project$BestShuffle$shuffleString(input)));
 };
-var $author$project$Main$celsiusToFahrenheit = function (celsius) {
-	return (celsius - 1.8) / 32;
-};
-var $author$project$Main$fahrenheitToCelsius = function (fahrenheit) {
-	return (fahrenheit - 32) / 1.8;
-};
-var $elm$core$String$toFloat = _String_toFloat;
 var $elm$core$Basics$negate = function (n) {
 	return -n;
 };
@@ -5377,86 +5370,47 @@ var $author$project$LeapYear$yearType = function (year) {
 };
 var $author$project$Main$update = F2(
 	function (msg, model) {
-		switch (msg.$) {
-			case 'FahreinheitToCelsius':
-				var userInput = msg.a;
-				var _v1 = $elm$core$String$toFloat(userInput);
-				if (_v1.$ === 'Nothing') {
+		if (msg.$ === 'YearClassification') {
+			var userInput = msg.a;
+			var updateYearType = function (yearModel) {
+				return _Utils_update(
+					yearModel,
+					{
+						yearType: $author$project$LeapYear$yearType(userInput)
+					});
+			};
+			return _Utils_update(
+				model,
+				{
+					leapYearModel: updateYearType(model.leapYearModel)
+				});
+		} else {
+			var userInput = msg.a;
+			var _v1 = $author$project$BestShuffle$bestShuffle(userInput);
+			if (_v1.$ === 'Nothing') {
+				var bestShuffleInvalid = function (bestShuffleModel) {
 					return _Utils_update(
-						model,
-						{fahrenheitFieldValid: false, fahrenheitFieldValue: userInput});
-				} else {
-					var number = _v1.a;
-					return _Utils_update(
-						model,
-						{
-							celsius: $author$project$Main$fahrenheitToCelsius(number),
-							celsiusFieldValid: true,
-							fahrenheit: number,
-							fahrenheitFieldValid: true,
-							fahrenheitFieldValue: userInput
-						});
-				}
-			case 'CelsiusToFahrenheit':
-				var userInput = msg.a;
-				var _v2 = $elm$core$String$toFloat(userInput);
-				if (_v2.$ === 'Nothing') {
-					return _Utils_update(
-						model,
-						{celsiusFieldValid: false, celsiusFieldValue: userInput});
-				} else {
-					var number = _v2.a;
-					return _Utils_update(
-						model,
-						{
-							celsius: number,
-							celsiusFieldValid: true,
-							celsiusFieldValue: userInput,
-							fahrenheit: $author$project$Main$celsiusToFahrenheit(number),
-							fahrenheitFieldValid: true
-						});
-				}
-			case 'YearClassification':
-				var userInput = msg.a;
-				var updateYearType = function (yearModel) {
-					return _Utils_update(
-						yearModel,
-						{
-							yearType: $author$project$LeapYear$yearType(userInput)
-						});
+						bestShuffleModel,
+						{isValid: false});
 				};
 				return _Utils_update(
 					model,
 					{
-						leapYearModel: updateYearType(model.leapYearModel)
+						bestShuffleModel: bestShuffleInvalid(model.bestShuffleModel)
 					});
-			default:
-				var userInput = msg.a;
-				var _v3 = $author$project$BestShuffle$bestShuffle(userInput);
-				if (_v3.$ === 'Nothing') {
-					var bestShuffleInvalid = function (bestShuffleModel) {
-						return _Utils_update(
-							bestShuffleModel,
-							{isValid: false});
-					};
+			} else {
+				var result = _v1.a;
+				var withBestShuffle = function (bestShuffleModel) {
 					return _Utils_update(
-						model,
-						{
-							bestShuffleModel: bestShuffleInvalid(model.bestShuffleModel)
-						});
-				} else {
-					var result = _v3.a;
-					var withBestShuffle = function (bestShuffleModel) {
-						return _Utils_update(
-							bestShuffleModel,
-							{bestShuffle: result, isValid: true});
-					};
-					return _Utils_update(
-						model,
-						{
-							bestShuffleModel: withBestShuffle(model.bestShuffleModel)
-						});
-				}
+						bestShuffleModel,
+						{bestShuffle: result, isValid: true});
+				};
+				return _Utils_update(
+					model,
+					{
+						bestShuffleModel: withBestShuffle(model.bestShuffleModel)
+					});
+			}
 		}
 	});
 var $author$project$Main$BestShuffle = function (a) {

@@ -65,9 +65,7 @@ initialModel =
 
 
 type Msg
-    = FahreinheitToCelsius String
-    | CelsiusToFahrenheit String
-    | YearClassification String
+    = YearClassification String
     | BestShuffle String
 
 
@@ -123,57 +121,9 @@ getCelsiusFieldValidOrNot model =
         [ class "input is-danger" ]
 
 
-viewCelsius : Model -> String
-viewCelsius model =
-    if model.celsiusFieldValid == True then
-        model.celsius |> formatTemperature
-    else
-        model.celsiusFieldValue
-
-
-viewFahrenheit : Model -> String
-viewFahrenheit model =
-    if model.fahrenheitFieldValid == True then
-        model.fahrenheit |> formatTemperature
-    else
-        model.fahrenheitFieldValue
-
-
-formatTemperature number =
-    format { usLocale | decimals = Max 2 } number
-
-
 update : Msg -> Model -> Model
 update msg model =
     case msg of
-        FahreinheitToCelsius userInput ->
-            case String.toFloat userInput of
-                Nothing ->
-                    { model | fahrenheitFieldValid = False, fahrenheitFieldValue = userInput }
-
-                Just number ->
-                    { model
-                        | fahrenheit = number
-                        , celsius = fahrenheitToCelsius number
-                        , fahrenheitFieldValue = userInput
-                        , fahrenheitFieldValid = True
-                        , celsiusFieldValid = True
-                    }
-
-        CelsiusToFahrenheit userInput ->
-            case String.toFloat userInput of
-                Nothing ->
-                    { model | celsiusFieldValid = False, celsiusFieldValue = userInput }
-
-                Just number ->
-                    { model
-                        | celsius = number
-                        , fahrenheit = celsiusToFahrenheit number
-                        , celsiusFieldValue = userInput
-                        , celsiusFieldValid = True
-                        , fahrenheitFieldValid = True
-                    }
-
         YearClassification userInput ->
             let updateYearType yearModel = { yearModel | yearType = yearType userInput } in
             { model | leapYearModel = updateYearType(model.leapYearModel) }
