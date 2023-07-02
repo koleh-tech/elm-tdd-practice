@@ -73,6 +73,9 @@ maxStringDiffSuite =
             \_ ->
                 bestOutOfShuffledStrings "grrrrrr" ["rgrrrrr", "rrgrrrr", "rrrgrrr"]
                     |> Expect.equal "rrrgrrr"
+        , test "If all shuffled strings are actually the same, returns the original string" <|
+            \_ ->
+                bestOutOfShuffledStrings "grrrrrr" ["grrrrrr","grrrrrr","grrrrrr"]
+                    |> Expect.equal "grrrrrr"
 
         ]
-
