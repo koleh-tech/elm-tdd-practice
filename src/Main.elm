@@ -80,7 +80,9 @@ view model =
                     ++ getCelsiusFieldValidOrNot model
                 )
                 []
-            , h1 [ class "title" ] [ text "Leap year classifier" ]
+            ]
+        , div [ class "container" ]
+            [ h1 [ class "title" ] [ text "Leap year classifier" ]
             , h2 [ class "subtitle" ] [ text "Determine if year is leap year" ]
             , label [ for "Year", class "label" ] [ text "Year:" ]
             , input

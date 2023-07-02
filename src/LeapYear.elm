@@ -29,10 +29,10 @@ yearType year =
         convertedYear =
             convertUserInput year
     in
-        if convertedYear > 1 then
-            if isLeapYear convertedYear == True then
-                "Leap year"
-            else
-                "Common year"
+    if convertedYear >= 0 then
+        if isLeapYear convertedYear == True then
+            "Leap year"
         else
-            "Not a valid year"
+            "Common year"
+    else
+        "Not a valid year"

@@ -5238,13 +5238,14 @@ var $author$project$LeapYear$convertUserInput = function (input) {
 		return number;
 	}
 };
+var $elm$core$Basics$ge = _Utils_ge;
 var $elm$core$Basics$neq = _Utils_notEqual;
 var $author$project$LeapYear$isLeapYear = function (year) {
 	return ((!(year % 4)) && (!(!(year % 100)))) || (!(year % 400));
 };
 var $author$project$LeapYear$yearType = function (year) {
 	var convertedYear = $author$project$LeapYear$convertUserInput(year);
-	return (convertedYear > 1) ? ($author$project$LeapYear$isLeapYear(convertedYear) ? 'Leap year' : 'Common year') : 'Not a valid year';
+	return (convertedYear >= 0) ? ($author$project$LeapYear$isLeapYear(convertedYear) ? 'Leap year' : 'Common year') : 'Not a valid year';
 };
 var $author$project$Main$update = F2(
 	function (msg, model) {
@@ -5494,7 +5495,6 @@ var $elm$core$List$head = function (list) {
 		return $elm$core$Maybe$Nothing;
 	}
 };
-var $elm$core$Basics$ge = _Utils_ge;
 var $elm$core$Basics$not = _Basics_not;
 var $elm$core$List$any = F2(
 	function (isOkay, list) {
@@ -6013,7 +6013,16 @@ var $author$project$Main$view = function (model) {
 									$author$project$Main$viewCelsius(model))
 								]),
 							$author$project$Main$getCelsiusFieldValidOrNot(model)),
-						_List_Nil),
+						_List_Nil)
+					])),
+				A2(
+				$elm$html$Html$div,
+				_List_fromArray(
+					[
+						$elm$html$Html$Attributes$class('container')
+					]),
+				_List_fromArray(
+					[
 						A2(
 						$elm$html$Html$h1,
 						_List_fromArray(
