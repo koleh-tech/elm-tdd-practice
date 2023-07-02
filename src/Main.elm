@@ -40,26 +40,16 @@ initialLeapYearModel =
 
 
 type alias Model =
-    { fahrenheitFieldValid : Bool
-    , celsiusFieldValid : Bool
-    , fahrenheit : Float
-    , celsius : Float
-    , fahrenheitFieldValue : String
-    , celsiusFieldValue : String
-    , leapYearModel : LeapYearModel
+    {
+    leapYearModel : LeapYearModel
     , bestShuffleModel : BestShuffleModel
     }
 
 
 initialModel : Model
 initialModel =
-    { fahrenheitFieldValid = True
-    , celsiusFieldValid = True
-    , fahrenheit = 32
-    , celsius = 0
-    , fahrenheitFieldValue = "32"
-    , celsiusFieldValue = "0"
-    , leapYearModel = initialLeapYearModel
+    {
+    leapYearModel = initialLeapYearModel
     , bestShuffleModel = initialBestShuffleModel
     }
 
