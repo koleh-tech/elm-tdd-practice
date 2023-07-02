@@ -5568,7 +5568,7 @@ var $author$project$Main$view = function (model) {
 							]),
 						_List_fromArray(
 							[
-								$elm$html$Html$text('Gives the best shuffle of a word')
+								$elm$html$Html$text('Finds a shuffled version of words with as many differing characters as possible.')
 							])),
 						A2(
 						$elm$html$Html$label,

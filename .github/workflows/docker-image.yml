@@ -22,7 +22,7 @@ jobs:
     - name: Build the Docker image, test it and deploy the app
       run: |
         docker build -t my-ubuntu-image .
-        docker run -t my-ubuntu-image make
+        docker run -it -v $(pwd)/:/app my-ubuntu-image make
   # Single deploy job since we're just deploying
   deploy:
     environment:
