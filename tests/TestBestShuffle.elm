@@ -94,11 +94,8 @@ shuffleStringSuite =
                     |> Expect.equal ["ab", "ba"]
         , test "return all permutations of chars in the original string" <|
             \_ ->
-                shuffleString "elk"
+                shuffleString "seesaw"
                     |> List.length
-                    |> Expect.equal 6
-                -- shuffleString "abracadabra"
-                --     |> List.length
-                --     |> Expect.equal 39916800
+                    |> Expect.equal 720
         ]
 
