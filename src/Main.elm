@@ -16,6 +16,7 @@ type alias BestShuffleModel =
     { originalWord : String
     , isValid : Bool
     , bestShuffle : String
+    , numDifferingChars : Int
     }
 
 
@@ -24,6 +25,7 @@ initialBestShuffleModel =
     { originalWord = ""
     , isValid = True
     , bestShuffle = ""
+    , numDifferingChars = 0
     }
 
 
