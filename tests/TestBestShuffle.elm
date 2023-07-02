@@ -87,5 +87,9 @@ shuffleStringSuite =
             \_ ->
                 shuffleString "a"
                     |> Expect.equal ["a"]
+        , test "Returns all permutations of a word, including the original" <|
+            \_ ->
+                shuffleString "ab"
+                    |> Expect.equal ["ab", "ba"]
         ]
 
