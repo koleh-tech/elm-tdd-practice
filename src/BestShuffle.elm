@@ -31,4 +31,4 @@ bestOutOfShuffledStrings originalString shuffledStrings =
 
 shuffleString : String -> List String
 shuffleString originalString =
-    ["b"]
+    ["a"]
