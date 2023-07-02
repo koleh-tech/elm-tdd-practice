@@ -125,10 +125,9 @@ bestShuffleValidSuite =
             \_ ->
                 bestShuffle "tree"
                     |> Expect.equal(Just "eetr")
-        -- , test "takes a while for long words" <|
-        --     \_ ->
-        --         bestShuffle "12345678"
-        --             |> (\x -> x == Just "eetr")
-        --             |> Expect.equal True
+        , test "returns shuffle with the most differing chars, if 6 chars" <|
+            \_ ->
+                bestShuffle "123456"
+                    |> Expect.equal(Just "245613")
         ]
 
