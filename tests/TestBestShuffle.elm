@@ -5,6 +5,7 @@ import Fuzz exposing (Fuzzer, int, list, string)
 import String exposing (toList)
 import Test exposing (..)
 import List exposing (map2)
+import List.Extra exposing (permutations)
 import BestShuffle exposing (numberOfDifferingCharacters, bestOutOfShuffledStrings, shuffleString)
 
 
@@ -83,13 +84,18 @@ maxStringDiffSuite =
 shuffleStringSuite : Test
 shuffleStringSuite =
     describe "Given the original string, shuffleString will"
-        [ test "Return a single elem list for words with one letter" <|
+        [ test "return a single elem list for words with one letter" <|
             \_ ->
                 shuffleString "a"
                     |> Expect.equal ["a"]
-        , test "Returns all permutations of a word, including the original" <|
+        , test "include the original in its list" <|
             \_ ->
                 shuffleString "ab"
                     |> Expect.equal ["ab", "ba"]
+        , test "return all permutations of chars in the original string" <|
+            \_ ->
+                shuffleString "abracadabra"
+                    |> List.length
+                    |> Expect.equal 25200
         ]
 
