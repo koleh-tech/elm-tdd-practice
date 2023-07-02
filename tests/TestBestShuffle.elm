@@ -4,6 +4,7 @@ import Expect exposing (Expectation)
 import Fuzz exposing (Fuzzer, int, list, string)
 import String exposing (toList)
 import Test exposing (..)
+import List exposing (map2)
 import BestShuffle exposing (stringDiffScore)
 
 
@@ -35,11 +36,28 @@ stringDiffScoreSuite =
     describe "stringDiffScore, returns 0 if"
         [ test "if all chars have shifted" <|
             \_ ->
-                stringDiffScore "tree" "eetr"
-                    |> Expect.equal 0
+                let
+                    inputOriginalStrings = ["tree", "elk", "up"]
+                    inputShuffledStrings = ["eetr", "kel", "pu"]
+                    expectedPassingAssertions  = List.length(inputOriginalStrings)
+                in
+                    List.map2 stringDiffScore inputOriginalStrings inputShuffledStrings
+                        |> List.filter (\x -> x == 0)
+                        |> List.length
+                        |> Expect.equal expectedPassingAssertions
         , test "returns 1 if one char hasn't shifted" <|
             \_ ->
                 stringDiffScore "tree" "eter"
                     |> Expect.equal 1
-
+        , test "strings with many overlapping chars will produce same result" <|
+            \_ ->
+                let
+                    inputOriginalStrings = ["grrrrrr", "grrrrrr", "grrrrrr"]
+                    inputShuffledStrings = ["rgrrrrr", "rrgrrrr", "rrrgrrr"]
+                    expectedPassingAssertions  = List.length(inputShuffledStrings)
+                in
+                    List.map2 stringDiffScore inputOriginalStrings inputShuffledStrings
+                        |> List.filter (\x -> x == 5)
+                        |> List.length
+                        |> Expect.equal expectedPassingAssertions
         ]
