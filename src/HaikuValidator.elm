@@ -5,4 +5,4 @@ import String
 
 isValidHaiku : String -> Bool
 isValidHaiku haiku =
-    True
+    False
