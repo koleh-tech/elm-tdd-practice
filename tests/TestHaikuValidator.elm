@@ -97,11 +97,12 @@ countingSyllablesTestSuite =
             \_ ->
                 [
                     haikuSyllables "at/coaders/toad",
-                    haikuSyllables "ta/rohdy/code"
-                    -- haikuSyllables "happy purple frog/eating bugs in the marshes/get indigestion"
+                    haikuSyllables "ta/rohdy/code",
+                    haikuSyllables "happy purple frog/eating bugs in the marshes/get indigestion"
                 ]
                     |> Expect.equal [
                         [1,2,1],
-                        [1,2,2]
+                        [1,2,2],
+                        [5,7,5]
                     ]
         ]
