@@ -1,5 +1,6 @@
 module HaikuValidator exposing (isValidHaiku, haikuSyllables)
-
+import List
+import Array
 import String
 
 
@@ -7,6 +8,15 @@ isValidHaiku : String -> Bool
 isValidHaiku haiku =
     False
 
+isSyllable : Char -> Bool
+isSyllable toCheck =
+    List.member toCheck ['a', 'e', 'i', 'o', 'u']
+
 haikuSyllables : String -> List Int
 haikuSyllables haiku =
-    [1,0,1]
+    let
+        stringsToCheck = String.split "/" haiku
+        charsToCheck = List.map String.toList stringsToCheck
+        classifyNoSyllables = (\word -> List.map isSyllable word |> List.filter (\x -> x == True) |> List.length)
+    in
+    List.map classifyNoSyllables charsToCheck
