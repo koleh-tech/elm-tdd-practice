@@ -7,7 +7,7 @@ import String
 
 isValidHaiku : String -> Bool
 isValidHaiku haiku =
-    False
+    haikuSyllables haiku == [5,7,5]
 
 isSyllable : Char -> Bool
 isSyllable toCheck =
