@@ -83,6 +83,14 @@ countingSyllablesTestSuite =
     describe "A syllable will counted if"
         [ test "There is a vowel" <|
             \_ ->
-                haikuSyllables "a,qwtjk,i"
-                    |> Expect.equal [1,0,1]
+                [
+                    haikuSyllables "a,qwtjk,i",
+                    haikuSyllables "qwtjk,a,i",
+                    haikuSyllables "i,a,qwtjk"
+                ]
+                    |> Expect.equal [
+                        [1,0,1],
+                        [0,1,1],
+                        [1,1,0]
+                    ]
         ]
