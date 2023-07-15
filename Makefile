@@ -5,6 +5,9 @@ all:
 run_tests:
 	elm-test
 
+run_tests_watch:
+	elm-test --watch
+
 compile_web_app:
 	elm make src/Main.elm --output=main.js
 
