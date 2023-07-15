@@ -1,5 +1,6 @@
 module HaikuValidator exposing (isValidHaiku, haikuSyllables)
 import List
+import List.Extra exposing (groupWhile)
 import Array
 import String
 
@@ -15,7 +16,8 @@ isSyllable toCheck =
 numberOfSyllablesInList : List Char -> Int
 numberOfSyllablesInList word =
     List.map isSyllable word
-    |> List.filter (\x -> x == True)
+    |> groupWhile (\a b -> a == True && b == True)
+    |> List.filter (\a -> a /= (False,[]))
     |> List.length
 
 haikuSyllables : String -> List Int

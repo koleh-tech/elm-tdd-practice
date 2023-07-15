@@ -96,9 +96,9 @@ countingSyllablesTestSuite =
         , test "There are a contiguous set of vowels" <|
             \_ ->
                 [
-                    haikuSyllables "a/qwtjk/toad"
+                    haikuSyllables "at/coaders/toad"
                 ]
                     |> Expect.equal [
-                        [1,0,1]
+                        [1,2,1]
                     ]
         ]
