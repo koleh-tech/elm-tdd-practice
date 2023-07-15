@@ -86,13 +86,14 @@ validHaikuSuite =
                 let
                     input =
                         [
-                            "happy purple frog/eating bugs in the marshes/get indigestion"
+                            "happy purple frog/eating bugs in the marshes/get indigestion",
+                            "computer programs/The bugs try to eat my code/I must not let them"
                         ]
                 in
                     List.map isValidHaiku input
                         |> List.filter (\x -> x == True)
                         |> List.length
-                        |> Expect.equal 1
+                        |> Expect.equal 2
         ]
 
      
