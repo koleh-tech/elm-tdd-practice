@@ -3,7 +3,7 @@ module TestHaikuValidator exposing (..)
 import Expect exposing (Expectation)
 import Fuzz exposing (Fuzzer, int, list, string)
 import Test exposing (..)
-import HaikuValidator exposing (isValidHaiku)
+import HaikuValidator exposing (isValidHaiku, haikuSyllables)
 
 
 -- Haiku is an ancient form of Japanese poetry. A haiku is a three-line poem with seventeen syllables,
@@ -54,8 +54,8 @@ import HaikuValidator exposing (isValidHaiku)
 -- [Source: http://uva.onlinejudge.org/]
 
      
-commonYearSuite : Test
-commonYearSuite =
+invalidHaikuSuite : Test
+invalidHaikuSuite =
     describe "Poems are not valid Haikus if"
         [ test "They have the incorrect spacing of synonyms" <|
             \_ ->
@@ -75,4 +75,14 @@ commonYearSuite =
             \_ ->
                 isValidHaiku ""
                     |> Expect.equal False
+        ]
+
+     
+countingSyllablesTestSuite : Test
+countingSyllablesTestSuite =
+    describe "A syllable will counted if"
+        [ test "There is a vowel" <|
+            \_ ->
+                haikuSyllables "a,qwtjk,i"
+                    |> Expect.equal [1,0,1]
         ]
