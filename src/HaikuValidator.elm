@@ -16,7 +16,7 @@ haikuSyllables : String -> List Int
 haikuSyllables haiku =
     let
         stringsToCheck = String.split "/" haiku
-        charsToCheck = List.map String.toList stringsToCheck
         classifyNoSyllables = (\word -> List.map isSyllable word |> List.filter (\x -> x == True) |> List.length)
     in
-    List.map classifyNoSyllables charsToCheck
+    List.map String.toList stringsToCheck
+    |> List.map classifyNoSyllables
