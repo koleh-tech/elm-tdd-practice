@@ -93,6 +93,10 @@ countingSyllablesTestSuite =
                         [0,1,1],
                         [1,1,0]
                     ]
+        , test "y is counted as a vowel" <|
+            \_ ->
+                haikuSyllables "y/a/b"
+                    |> Expect.equal [1,1,0]
         , test "There are a contiguous set of vowels" <|
             \_ ->
                 [
