@@ -11,7 +11,7 @@ isValidHaiku haiku =
 
 isSyllable : Char -> Bool
 isSyllable toCheck =
-    List.member toCheck ['a', 'e', 'i', 'o', 'u']
+    List.member toCheck ['a', 'e', 'i', 'o', 'u', 'y']
 
 numberOfSyllablesInList : List Char -> Int
 numberOfSyllablesInList word =
