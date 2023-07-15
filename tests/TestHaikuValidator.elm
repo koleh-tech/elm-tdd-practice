@@ -73,8 +73,26 @@ invalidHaikuSuite =
                         |> Expect.equal 3
         , test "They are blank strings" <|
             \_ ->
-                isValidHaiku ""
+                isValidHaiku "//"
                     |> Expect.equal False
+        ]
+
+     
+validHaikuSuite : Test
+validHaikuSuite =
+    describe "Poems are valid Haikus if"
+        [ test "They have the correct spacing of synonyms" <|
+            \_ ->
+                let
+                    input =
+                        [
+                            "happy purple frog/eating bugs in the marshes/get indigestion"
+                        ]
+                in
+                    List.map isValidHaiku input
+                        |> List.filter (\x -> x == True)
+                        |> List.length
+                        |> Expect.equal 1
         ]
 
      
