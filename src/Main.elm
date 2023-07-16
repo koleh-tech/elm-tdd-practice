@@ -95,12 +95,14 @@ view model =
             ]
         ]
 
+
 bestShuffleText : Model -> String
-bestShuffleText model =  
+bestShuffleText model =
     if model.bestShuffleModel.bestShuffle == "" || model.bestShuffleModel.isValid == False then
         ""
     else
         model.bestShuffleModel.bestShuffle ++ " (" ++ String.fromInt model.bestShuffleModel.numDifferingChars ++ ")"
+
 
 update : Msg -> Model -> Model
 update msg model =
@@ -117,19 +119,20 @@ update msg model =
                 Nothing ->
                     let
                         bestShuffleInvalid bestShuffleModel =
-                            { bestShuffleModel |
-                                isValid = False
+                            { bestShuffleModel
+                                | isValid = False
                             }
                     in
-                        { model |
-                            bestShuffleModel = bestShuffleInvalid (model.bestShuffleModel)
+                        { model
+                            | bestShuffleModel = bestShuffleInvalid (model.bestShuffleModel)
                         }
 
                 Just result ->
                     let
                         withBestShuffle bestShuffleModel =
-                            { bestShuffleModel |
-                                bestShuffle = result, isValid = True
+                            { bestShuffleModel
+                                | bestShuffle = result
+                                , isValid = True
                                 , numDifferingChars = numberOfDifferingCharacters userInput result
                             }
                     in
