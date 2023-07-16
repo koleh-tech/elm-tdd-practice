@@ -18,7 +18,10 @@ initialFizzBuzzModel =
 
 determineFizzBuzz : Int -> String
 determineFizzBuzz number =
-    String.fromInt number
+    if number == 3 then
+        "Fizz"
+    else
+        String.fromInt number
 
 renderFizzBuzzSequence : FizzBuzzModel -> Html msg
 renderFizzBuzzSequence model =
