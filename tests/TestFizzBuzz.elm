@@ -96,25 +96,25 @@ fizzNumberSuite =
 
 
      
--- buzzNumberSuite : Test
--- buzzNumberSuite =
---     describe "determineFizzBuzz will return 'Buzz'"
---         [ test "If the number is divisible by 5" <|
---             \_ ->
---                 let
---                     input = [5, 10, 25, 35, 45]
---                 in
---                 List.map determineFizzBuzz input
---                     |> Expect.equal (List.map String.fromInt input)
---         , test "If the number is not divisible by 5 and 3" <|
---             \_ ->
---                 let
---                     onlyDivisibleBy3 = [3, 6, 9, 12, 18, 21, 24, 27, 33, 36, 39, 42, 48, 51, 54, 57, 63, 66, 69, 72, 78, 81, 84, 87, 93, 96, 99]
---                     alsoDivisibleBy5 = [15, 30, 60, 75, 90]
---                     input = onlyDivisibleBy3 ++ alsoDivisibleBy5
---                 in
---                 List.map determineFizzBuzz input
---                     |> List.filter (\x -> x ==  "Fizz")
---                     |> List.length
---                     |> Expect.equal (List.length onlyDivisibleBy3)
---         ]
+buzzNumberSuite : Test
+buzzNumberSuite =
+    describe "determineFizzBuzz will return 'Buzz'"
+        [ test "If the number is divisible by 5" <|
+            \_ ->
+                let
+                    input = [5, 10, 25, 35, 45]
+                in
+                List.map determineFizzBuzz input
+                    |> Expect.equal (List.map (\x -> "Buzz") input)
+        -- , test "If the number is not divisible by 5 and 3" <|
+        --     \_ ->
+        --         let
+        --             onlyDivisibleBy5 = [5, 10, 25, 35, 45, 55, 100]
+        --             alsoDivisibleBy5 = [15, 30, 60, 75, 90]
+        --             input = onlyDivisibleBy5 ++ alsoDivisibleBy5
+        --         in
+        --         List.map determineFizzBuzz input
+        --             |> List.filter (\x -> x ==  "Buzz")
+        --             |> List.length
+        --             |> Expect.equal (List.length onlyDivisibleBy5)
+        ]
