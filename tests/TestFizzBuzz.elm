@@ -35,7 +35,6 @@ import FizzBuzz exposing (FizzBuzzModel, initialFizzBuzzModel, updateFizzBuzzMod
 -- Buzz
 -- ... etc up to 100
 
-
 updateFizzBuzzModelSuite : Test
 updateFizzBuzzModelSuite =
     describe "When the user hits the button"
@@ -47,6 +46,12 @@ updateFizzBuzzModelSuite =
                 in
                     [ List.length initialFizzBuzzModel.sequence, List.length actual.sequence ]
                         |> Expect.equal [ 0, 100 ]
+        , test "Contains 33 'Fizz'" <|
+            \_ ->
+                (updateFizzBuzzModel initialFizzBuzzModel).sequence
+                    |> List.filter (\x -> x == "Fizz")
+                    |> List.length
+                    |> Expect.equal 33
         ]
 
 
