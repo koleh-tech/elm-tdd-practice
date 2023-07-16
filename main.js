@@ -4452,10 +4452,7 @@ var $elm$core$Set$toList = function (_v0) {
 var $elm$core$Basics$EQ = {$: 'EQ'};
 var $elm$core$Basics$GT = {$: 'GT'};
 var $elm$core$Basics$LT = {$: 'LT'};
-var $author$project$FizzBuzz$initialFizzBuzzModel = {
-	sequence: _List_fromArray(
-		[''])
-};
+var $author$project$FizzBuzz$initialFizzBuzzModel = {sequence: _List_Nil};
 var $author$project$HaikuValidator$initialHaikuReviewModel = {haiku: '', isValid: true, syllables: ''};
 var $author$project$Main$initialLeapYearModel = {year: 0, yearType: ''};
 var $author$project$Main$initialModel = {bestShuffleModel: $author$project$Main$initialBestShuffleModel, fizzBuzzModel: $author$project$FizzBuzz$initialFizzBuzzModel, haikuReviewModel: $author$project$HaikuValidator$initialHaikuReviewModel, leapYearModel: $author$project$Main$initialLeapYearModel};
@@ -5356,8 +5353,10 @@ var $author$project$FizzBuzz$updateFizzBuzzModel = function (model) {
 	return _Utils_update(
 		model,
 		{
-			sequence: _List_fromArray(
-				['1', '2', 'Fizz', '4', 'Buzz', 'Fizz', '7', '8', 'Fizz', 'Buzz', '11', 'Fizz', '13', '14', 'FizzBuzz', '16', '17', 'Fizz', '19', 'Buzz'])
+			sequence: A2(
+				$elm$core$List$map,
+				$elm$core$String$fromInt,
+				A2($elm$core$List$range, 1, 100))
 		});
 };
 var $elm$core$String$concat = function (strings) {

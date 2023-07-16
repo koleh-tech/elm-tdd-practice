@@ -14,7 +14,7 @@ type alias FizzBuzzModel =
 
 initialFizzBuzzModel : FizzBuzzModel
 initialFizzBuzzModel =
-    { sequence = [""] }
+    { sequence = [] }
 
 renderFizzBuzzSequence : FizzBuzzModel -> Html msg
 renderFizzBuzzSequence model =
@@ -24,7 +24,10 @@ renderFizzBuzzSequence model =
 
 updateFizzBuzzModel : FizzBuzzModel -> FizzBuzzModel
 updateFizzBuzzModel model = 
-    { model | sequence = ["1", "2", "Fizz", "4", "Buzz", "Fizz", "7", "8", "Fizz", "Buzz", "11", "Fizz", "13", "14", "FizzBuzz", "16", "17", "Fizz", "19", "Buzz"]}
+    { model |
+        sequence = List.range 1 100
+            |> List.map String.fromInt
+    }
 
 renderList : List String -> Html msg
 renderList lst =
