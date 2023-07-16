@@ -18,7 +18,7 @@ initialFizzBuzzModel =
 
 determineFizzBuzz : Int -> String
 determineFizzBuzz number =
-    "test"
+    "2"
 
 renderFizzBuzzSequence : FizzBuzzModel -> Html msg
 renderFizzBuzzSequence model =
