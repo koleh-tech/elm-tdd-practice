@@ -3,7 +3,7 @@ module TestHaikuValidator exposing (..)
 import Expect exposing (Expectation)
 import Fuzz exposing (Fuzzer, int, list, string)
 import Test exposing (..)
-import HaikuValidator exposing (isValidHaiku, haikuSyllables)
+import HaikuValidator exposing (isValidHaiku, haikuSyllables, updateHaikuReviewModel, HaikuReviewModel, initialHaikuReviewModel)
 
 
 -- Haiku is an ancient form of Japanese poetry. A haiku is a three-line poem with seventeen syllables,
@@ -53,6 +53,23 @@ import HaikuValidator exposing (isValidHaiku, haikuSyllables)
 -- 
 -- [Source: http://uva.onlinejudge.org/]
 
+updateHaikuReviewModelSuite : Test
+updateHaikuReviewModelSuite =
+    describe "HaikuReviewModels are updated to have new syllables and invalid state as user types"
+        [ test "If the syllables are not correct" <|
+            \_ ->
+                let
+                    userInput = "testing//"
+                in
+                updateHaikuReviewModel initialHaikuReviewModel userInput
+                    |> Expect.equal {initialHaikuReviewModel | syllables = "2,0,0"}
+        , test "They are blank strings" <|
+            \_ ->
+                isValidHaiku "//"
+                    |> Expect.equal False
+        ]
+
+     
      
 invalidHaikuSuite : Test
 invalidHaikuSuite =

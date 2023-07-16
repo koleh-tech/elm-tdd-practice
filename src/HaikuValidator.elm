@@ -1,4 +1,4 @@
-module HaikuValidator exposing (isValidHaiku, haikuSyllables)
+module HaikuValidator exposing (isValidHaiku, haikuSyllables, updateHaikuReviewModel, HaikuReviewModel, initialHaikuReviewModel)
 
 import List
 import Char
@@ -20,8 +20,9 @@ initialHaikuReviewModel =
     , syllables = ""
     }
 
--- updateHaikuReviewModel : HaikuReviewModel -> String -> HaikuReviewModel
--- updateHaikuReviewModel model userInput = 
+updateHaikuReviewModel : HaikuReviewModel -> String -> HaikuReviewModel
+updateHaikuReviewModel model userInput = 
+    model
 --     { model
 --         | isValid = isValidHaiku userInput
 --         , syllables = haikuSyllables userInput |> List.map String.fromInt |> List.map (\x -> x ++ ",") |> String.concat
