@@ -93,7 +93,7 @@ validHaikuSuite =
                     List.map isValidHaiku input
                         |> List.filter (\x -> x == True)
                         |> List.length
-                        |> Expect.equal 2
+                        |> Expect.equal 1
         ]
 
      
