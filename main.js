@@ -5606,7 +5606,7 @@ var $author$project$HaikuValidator$getHaikuValidOrNot = function (model) {
 		]);
 };
 var $elm$html$Html$h1 = _VirtualDom_node('h1');
-var $elm$html$Html$h2 = _VirtualDom_node('h2');
+var $elm$html$Html$h3 = _VirtualDom_node('h3');
 var $elm$html$Html$input = _VirtualDom_node('input');
 var $elm$html$Html$label = _VirtualDom_node('label');
 var $elm$html$Html$Attributes$name = $elm$html$Html$Attributes$stringProperty('name');
@@ -5644,6 +5644,7 @@ var $elm$html$Html$Events$onInput = function (tagger) {
 			$elm$html$Html$Events$alwaysStop,
 			A2($elm$json$Json$Decode$map, tagger, $elm$html$Html$Events$targetValue)));
 };
+var $elm$html$Html$pre = _VirtualDom_node('pre');
 var $elm$html$Html$section = _VirtualDom_node('section');
 var $elm$virtual_dom$VirtualDom$text = _VirtualDom_text;
 var $elm$html$Html$text = $elm$virtual_dom$VirtualDom$text;
@@ -5676,14 +5677,21 @@ var $author$project$Main$view = function (model) {
 								$elm$html$Html$text('Leap year classifier')
 							])),
 						A2(
-						$elm$html$Html$h2,
+						$elm$html$Html$h3,
 						_List_fromArray(
 							[
 								$elm$html$Html$Attributes$class('subtitle')
 							]),
 						_List_fromArray(
 							[
-								$elm$html$Html$text('Determine if year is leap year')
+								$elm$html$Html$text('Initial specification:')
+							])),
+						A2(
+						$elm$html$Html$pre,
+						_List_Nil,
+						_List_fromArray(
+							[
+								$elm$html$Html$text('Write a function that returns true or false depending on whether its input integer is a leap year or not.\nA leap year is defined as one that is divisible by 4,\nbut is not otherwise divisible by 100 unless it is also divisible by 400.\nFor example, 2001 is a typical common year and 1996 is a typical leap year,\nwhereas 1900 is an atypical common year and 2000 is an atypical leap year.')
 							])),
 						A2(
 						$elm$html$Html$label,
@@ -5727,14 +5735,21 @@ var $author$project$Main$view = function (model) {
 								$elm$html$Html$text('Best shuffle')
 							])),
 						A2(
-						$elm$html$Html$h2,
+						$elm$html$Html$h3,
 						_List_fromArray(
 							[
 								$elm$html$Html$Attributes$class('subtitle')
 							]),
 						_List_fromArray(
 							[
-								$elm$html$Html$text('Gives the best shuffle of a word.')
+								$elm$html$Html$text('Initial specification:')
+							])),
+						A2(
+						$elm$html$Html$pre,
+						_List_Nil,
+						_List_fromArray(
+							[
+								$elm$html$Html$text('Shuffle the characters of a string in such a way that as many of the character values are in a different position as possible.\n\nDisplay the result as follows:\n\noriginal string, shuffled string, (score)\n\nThe score gives the number of positions whose character value did not change.\n\nExample\n  tree, eetr, (0)\n\nTest cases\n  abracadabra\n  seesaw\n  elk\n  grrrrrr\n  up\n  a\n\n[Source https://rosettacode.org/wiki/Best_shuffle]')
 							])),
 						A2(
 						$elm$html$Html$label,
@@ -5781,14 +5796,21 @@ var $author$project$Main$view = function (model) {
 								$elm$html$Html$text('Haiku Review')
 							])),
 						A2(
-						$elm$html$Html$h2,
+						$elm$html$Html$h3,
 						_List_fromArray(
 							[
 								$elm$html$Html$Attributes$class('subtitle')
 							]),
 						_List_fromArray(
 							[
-								$elm$html$Html$text('Checks validity of Haikus, as well as providing the number of syllables.')
+								$elm$html$Html$text('Initial specification:')
+							])),
+						A2(
+						$elm$html$Html$pre,
+						_List_Nil,
+						_List_fromArray(
+							[
+								$elm$html$Html$text('Shuffle the characters of a string in such a way that as many of the character values are in a different position as possible.\nHaiku is an ancient form of Japanese poetry. A haiku is a three-line poem with seventeen syllables,\nwhere the first line must contain five syllables, the second line must contain seven syllables,\nand the third line must contain five syllables. The lines do not have to rhyme. Here is an example, where slashes separate the lines:\n\nComputer programs/The bugs try to eat my code/I must not let them.\n\n\nYou must write a program that will review a haiku and check that each line contains the correct number of syllables.\n\nInput\n\nThe input contains one or more lines, each of which contains a single haiku. A haiku will contain at least three words,\nand words will be separated by either a single space or a slash (\'/\'). Slashes also separate the three lines of a haiku,\nso each haiku will contain exactly two slashes. (The three lines of the haiku will be contained within one physical line of the file.)\n\nA haiku will contain only lowercase letters (\'a\'-\'z\'), forward slashes (\'/\'), and spaces,\nand will be no more than 200 characters long (not counting the end-of-line characters).\n\nEach haiku is guaranteed to contain three lines, and each line will contain at least one word.\nYour job is to determine whether each line has the correct number of syllables (5/7/5). For the purposes of this problem,\nevery contiguous sequence of one or more vowels counts as one syllable, where the vowels are a, e,\ni, o, u, and y. Every word will contain at least one syllable.\n\n(Note that this method of counting syllables does not always agree with English conventions.\nIn the second example below, your program must consider the word \'code\' to have two syllables because the \'o\' and the \'e\' are not consecutive.\nHowever, in English the \'e\' is silent and so \'code\' actually has only one syllable.)\n\nOutput\n\nFor each haiku, output a comma-separated single line that contains the number of syllables in each haiku,\ntogether with the letter Y if it is a haiku, or N if it is not a haiku (see below).\n\n\nSample Input\n\nhappy purple frog/eating bugs in the marshes/get indigestion\ncomputer programs/the bugs try to eat my code/i will not let them\nAn old silent pond/A frog jumps into the pond—/Splash! Silence again.\n\nSample Output\n\n5,7,5,Yes\n5,8,5,No\n\n\n[Source: http://uva.onlinejudge.org/]')
 							])),
 						A2(
 						$elm$html$Html$label,
