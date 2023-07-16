@@ -52,12 +52,12 @@ updateFizzBuzzModelSuite =
                     |> List.filter (\x -> x == "Fizz")
                     |> List.length
                     |> Expect.equal 27
-        , test "Contains 33 'Buzz'" <|
+        , test "Contains 14 'Buzz'" <|
             \_ ->
                 (updateFizzBuzzModel initialFizzBuzzModel).sequence
                     |> List.filter (\x -> x == "Buzz")
                     |> List.length
-                    |> Expect.equal 15
+                    |> Expect.equal 14
         ]
 
 
