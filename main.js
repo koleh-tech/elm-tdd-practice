@@ -5349,13 +5349,27 @@ var $author$project$BestShuffle$bestShuffle = function (input) {
 			input,
 			$author$project$BestShuffle$shuffleString(input)));
 };
+var $elm$core$Basics$modBy = _Basics_modBy;
+var $author$project$FizzBuzz$determineFizzBuzz = function (number) {
+	return function (x) {
+		return _Utils_ap(
+			x,
+			(x === '') ? $elm$core$String$fromInt(number) : '');
+	}(
+		function (x) {
+			return _Utils_ap(
+				x,
+				(!A2($elm$core$Basics$modBy, 5, number)) ? 'Buzz' : '');
+		}(
+			(!A2($elm$core$Basics$modBy, 3, number)) ? 'Fizz' : ''));
+};
 var $author$project$FizzBuzz$updateFizzBuzzModel = function (model) {
 	return _Utils_update(
 		model,
 		{
 			sequence: A2(
 				$elm$core$List$map,
-				$elm$core$String$fromInt,
+				$author$project$FizzBuzz$determineFizzBuzz,
 				A2($elm$core$List$range, 1, 100))
 		});
 };

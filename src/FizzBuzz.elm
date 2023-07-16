@@ -35,7 +35,7 @@ updateFizzBuzzModel model =
     { model
         | sequence =
             List.range 1 100
-                |> List.map String.fromInt
+                |> List.map determineFizzBuzz
     }
 
 
