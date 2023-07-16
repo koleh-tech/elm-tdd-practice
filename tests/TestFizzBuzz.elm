@@ -2,6 +2,7 @@ module TestFizzBuzz exposing (..)
 
 import Expect exposing (Expectation)
 import Fuzz exposing (Fuzzer, int, list, string)
+import Random
 import Test exposing (..)
 import FizzBuzz exposing (FizzBuzzModel, initialFizzBuzzModel, updateFizzBuzzModel, renderFizzBuzzSequence, determineFizzBuzz)
 
@@ -55,8 +56,20 @@ regularNumberSuite =
     describe "determineFizzBuzz returns string version of a number"
         [ test "If it is not divisible by 3" <|
             \_ ->
-                determineFizzBuzz 2
-                    |> Expect.equal "2"
+                let
+                    input = [1,
+                        2,
+                        4,
+                        7,
+                        8,
+                        11,
+                        13,
+                        14,
+                        16,
+                        17]
+                in
+                List.map determineFizzBuzz input
+                    |> Expect.equal (List.map String.fromInt input)
         , test "Valid state is updated if correct syllables" <|
             \_ ->
                 True
