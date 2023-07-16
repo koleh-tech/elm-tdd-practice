@@ -1,9 +1,6 @@
 module FizzBuzz exposing (FizzBuzzModel, initialFizzBuzzModel, updateFizzBuzzModel, renderFizzBuzzSequence, determineFizzBuzz)
 
 import List
-import Char
-import List.Extra exposing (groupWhile)
-import Array
 import String
 import Html exposing (Html, div, text, input, section, h1, h2, label, ul, li)
 import Html.Attributes exposing (class, name, type_, for, value)
@@ -20,9 +17,25 @@ initialFizzBuzzModel =
 
 determineFizzBuzz : Int -> String
 determineFizzBuzz number =
-    (if modBy 3 number == 0 then "Fizz" else "")
-    |> (\x -> x ++ if modBy 5 number == 0 then "Buzz" else "")
-    |> (\x -> x ++ if x == "" then String.fromInt number else "")
+    (if modBy 3 number == 0 then
+        "Fizz"
+     else
+        ""
+    )
+        |> (\currentString ->
+                currentString
+                    ++ if modBy 5 number == 0 then
+                        "Buzz"
+                       else
+                        ""
+           )
+        |> (\currentString ->
+                currentString
+                    ++ if currentString == "" then
+                        String.fromInt number
+                       else
+                        ""
+           )
 
 
 renderFizzBuzzSequence : FizzBuzzModel -> Html msg

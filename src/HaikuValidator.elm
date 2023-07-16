@@ -15,12 +15,14 @@ type alias HaikuReviewModel =
     , syllables : String
     }
 
+
 initialHaikuReviewModel : HaikuReviewModel
 initialHaikuReviewModel =
     { haiku = ""
     , isValid = True
     , syllables = ""
     }
+
 
 getHaikuValidOrNot : HaikuReviewModel -> List (Html.Attribute msg)
 getHaikuValidOrNot model =
@@ -29,22 +31,24 @@ getHaikuValidOrNot model =
     else
         [ class "input is-danger" ]
 
+
 getHaikuSyllables : HaikuReviewModel -> String
 getHaikuSyllables model =
     model.syllables
 
 
-
 updateHaikuReviewModel : HaikuReviewModel -> String -> HaikuReviewModel
-updateHaikuReviewModel model userInput = 
+updateHaikuReviewModel model userInput =
     { model
         | isValid = isValidHaiku userInput
-        , syllables = haikuSyllables userInput
-            |> List.map String.fromInt
-            |> List.map (\x -> x ++ ",")
-            |> String.concat
-            |> String.slice 0 -1
+        , syllables =
+            haikuSyllables userInput
+                |> List.map String.fromInt
+                |> List.map (\x -> x ++ ",")
+                |> String.concat
+                |> String.slice 0 -1
     }
+
 
 isValidHaiku : String -> Bool
 isValidHaiku haiku =

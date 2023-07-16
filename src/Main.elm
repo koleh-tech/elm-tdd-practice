@@ -1,7 +1,7 @@
 module Main exposing (..)
 
 import Browser
-import Html exposing (Html, div, text, input, button, section, h1, h2, h3, label,  pre)
+import Html exposing (Html, div, text, input, button, section, h1, h2, h3, label, pre)
 import Html.Events exposing (onInput, onClick)
 import Html.Attributes exposing (class, name, type_, for, value)
 import String
@@ -48,7 +48,7 @@ type alias Model =
     { leapYearModel : LeapYearModel
     , bestShuffleModel : BestShuffleModel
     , haikuReviewModel : HaikuReviewModel
-    , fizzBuzzModel :FizzBuzzModel
+    , fizzBuzzModel : FizzBuzzModel
     }
 
 
@@ -57,7 +57,7 @@ initialModel =
     { leapYearModel = initialLeapYearModel
     , bestShuffleModel = initialBestShuffleModel
     , haikuReviewModel = initialHaikuReviewModel
-    , fizzBuzzModel  = initialFizzBuzzModel
+    , fizzBuzzModel = initialFizzBuzzModel
     }
 
 
@@ -74,11 +74,11 @@ view model =
         [ div [ class "container" ]
             [ h1 [ class "title" ] [ text "Leap year classifier" ]
             , h3 [ class "subtitle" ] [ text "Initial specification:" ]
-            , pre [] [text """Write a function that returns true or false depending on whether its input integer is a leap year or not.
+            , pre [] [ text """Write a function that returns true or false depending on whether its input integer is a leap year or not.
 A leap year is defined as one that is divisible by 4,
 but is not otherwise divisible by 100 unless it is also divisible by 400.
 For example, 2001 is a typical common year and 1996 is a typical leap year,
-whereas 1900 is an atypical common year and 2000 is an atypical leap year."""]
+whereas 1900 is an atypical common year and 2000 is an atypical leap year.""" ]
             , label [ for "Year", class "label" ] [ text "Year:" ]
             , input
                 ([ name "Year"
@@ -89,11 +89,11 @@ whereas 1900 is an atypical common year and 2000 is an atypical leap year."""]
                 )
                 []
             , text model.leapYearModel.yearType
-        ]
+            ]
         , div [ class "container" ]
             [ h1 [ class "title" ] [ text "Best shuffle" ]
             , h3 [ class "subtitle" ] [ text "Initial specification:" ]
-            , pre [] [text """Shuffle the characters of a string in such a way that as many of the character values are in a different position as possible.
+            , pre [] [ text """Shuffle the characters of a string in such a way that as many of the character values are in a different position as possible.
 
 Display the result as follows:
 
@@ -112,7 +112,7 @@ Test cases
   up
   a
 
-[Source https://rosettacode.org/wiki/Best_shuffle]"""]
+[Source https://rosettacode.org/wiki/Best_shuffle]""" ]
             , label [ for "ToShuffle", class "label" ] [ text "Word to shuffle:" ]
             , input
                 ([ name "ToShuffle"
@@ -129,7 +129,7 @@ Test cases
         , div [ class "container" ]
             [ h1 [ class "title" ] [ text "Haiku Review" ]
             , h3 [ class "subtitle" ] [ text "Initial specification:" ]
-            , pre [] [text """Shuffle the characters of a string in such a way that as many of the character values are in a different position as possible.
+            , pre [] [ text """Shuffle the characters of a string in such a way that as many of the character values are in a different position as possible.
 Haiku is an ancient form of Japanese poetry. A haiku is a three-line poem with seventeen syllables,
 where the first line must contain five syllables, the second line must contain seven syllables,
 and the third line must contain five syllables. The lines do not have to rhyme. Here is an example, where slashes separate the lines:
@@ -175,7 +175,7 @@ Sample Output
 5,8,5,No
 
 
-[Source: http://uva.onlinejudge.org/]"""]
+[Source: http://uva.onlinejudge.org/]""" ]
             , label [ for "ToShuffle", class "label" ] [ text "Haiku to check:" ]
             , input
                 ([ name "HaikuToCheck"
@@ -192,7 +192,7 @@ Sample Output
         , div [ class "container" ]
             [ h1 [ class "title" ] [ text "FizzBuzz" ]
             , h3 [ class "subtitle" ] [ text "Initial specification:" ]
-            , pre [] [text """Write a program that prints the numbers from 1 to 100.
+            , pre [] [ text """Write a program that prints the numbers from 1 to 100.
 But for multiples of three print "Fizz" instead of the number and for the multiples of five print "Buzz".
 For numbers which are multiples of both three and five print "FizzBuzz".
 
@@ -218,8 +218,8 @@ FizzBuzz
 Fizz
 19
 Buzz
-... etc up to 100"""]
-            , button [ onClick FizzBuzz ]  [ text "Get FizzBuzz sequence 1 to 100" ]
+... etc up to 100""" ]
+            , button [ onClick FizzBuzz ] [ text "Get FizzBuzz sequence 1 to 100" ]
             , renderFizzBuzzSequence model.fizzBuzzModel
             ]
         ]
@@ -266,13 +266,15 @@ update msg model =
                             }
                     in
                         { model | bestShuffleModel = withBestShuffle (model.bestShuffleModel) }
+
         HaikuReview userInput ->
-            { model |
-                haikuReviewModel = updateHaikuReviewModel model.haikuReviewModel userInput
+            { model
+                | haikuReviewModel = updateHaikuReviewModel model.haikuReviewModel userInput
             }
+
         FizzBuzz ->
-            { model |
-                fizzBuzzModel = updateFizzBuzzModel model.fizzBuzzModel
+            { model
+                | fizzBuzzModel = updateFizzBuzzModel model.fizzBuzzModel
             }
 
 

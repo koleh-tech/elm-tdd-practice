@@ -5351,14 +5351,14 @@ var $author$project$BestShuffle$bestShuffle = function (input) {
 };
 var $elm$core$Basics$modBy = _Basics_modBy;
 var $author$project$FizzBuzz$determineFizzBuzz = function (number) {
-	return function (x) {
+	return function (currentString) {
 		return _Utils_ap(
-			x,
-			(x === '') ? $elm$core$String$fromInt(number) : '');
+			currentString,
+			(currentString === '') ? $elm$core$String$fromInt(number) : '');
 	}(
-		function (x) {
+		function (currentString) {
 			return _Utils_ap(
-				x,
+				currentString,
 				(!A2($elm$core$Basics$modBy, 5, number)) ? 'Buzz' : '');
 		}(
 			(!A2($elm$core$Basics$modBy, 3, number)) ? 'Fizz' : ''));
