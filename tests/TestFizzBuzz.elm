@@ -49,10 +49,10 @@ updateFizzBuzzModelSuite =
         ]
 
      
-regularNumberSuite : Test
-regularNumberSuite =
-    describe "determineFizzBuzz returns string version of a number"
-        [ test "If it is not divisible by 3 and/or 5" <|
+determineFizzBuzzSuite : Test
+determineFizzBuzzSuite =
+    describe "determineFizzBuzz will"
+        [ test "Return the string version of a number, if it is not divisible by 3 and/or 5" <|
             \_ ->
                 let
                     input = [1,
@@ -68,13 +68,7 @@ regularNumberSuite =
                 in
                 List.map determineFizzBuzz input
                     |> Expect.equal (List.map String.fromInt input)
-        ]
-
-     
-divisibleby3NumberSuite : Test
-divisibleby3NumberSuite =
-    describe "determineFizzBuzz returns fizz"
-        [ test "If the number is divisible by 3" <|
+        , test "Return 'Fizz' if the number is divisible by 3" <|
             \_ ->
                 determineFizzBuzz 3
                     |> Expect.equal "Fizz"
