@@ -55,18 +55,29 @@ import HaikuValidator exposing (isValidHaiku, haikuSyllables, updateHaikuReviewM
 
 updateHaikuReviewModelSuite : Test
 updateHaikuReviewModelSuite =
-    describe "HaikuReviewModels are updated to have new syllables and invalid state as user types"
-        [ test "If the syllables are not correct" <|
+    describe "HaikuReviewModels are updated to have new syllables and valid state"
+        [ test "New syllables as user types, and invalid state if not correct" <|
             \_ ->
                 let
                     userInput = "testing//"
                 in
                 updateHaikuReviewModel initialHaikuReviewModel userInput
                     |> Expect.equal {initialHaikuReviewModel | isValid = False, syllables = "2,0,0"}
-        , test "They are blank strings" <|
+        , test "Valid state is updated if correct syllables" <|
             \_ ->
-                isValidHaiku "//"
-                    |> Expect.equal False
+                let
+                    invalidUserInput ="happy purple frog/eating bugs in the marshes/get"
+                    validUserInput ="happy purple frog/eating bugs in the marshes/get indigestion"
+                in
+                updateHaikuReviewModel initialHaikuReviewModel invalidUserInput
+                |> (\model -> [
+                    updateHaikuReviewModel initialHaikuReviewModel invalidUserInput,
+                    updateHaikuReviewModel model validUserInput
+                ])
+                |> Expect.equal [
+                    {initialHaikuReviewModel | isValid = False, syllables = "5,7,1"},
+                    {initialHaikuReviewModel | isValid = True, syllables = "5,7,5"}
+                ]
         ]
 
      
