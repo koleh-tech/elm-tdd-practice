@@ -12,31 +12,76 @@ import Html.Attributes exposing (class, name, type_, for, value)
 type alias FizzBuzzModel =
     { sequence : List String }
 
+
 initialFizzBuzzModel : FizzBuzzModel
 initialFizzBuzzModel =
     { sequence = [] }
 
+
 determineFizzBuzz : Int -> String
 determineFizzBuzz number =
-    (if modBy 3 number == 0 then "Fizz" else "")
-        |> (\x -> x ++ if modBy 5 number == 0 then "Buzz" else "")
-        |> (\x -> x ++ if x == "" then String.fromInt number else "")
+    let
+        strategies =
+            [ (\x ->
+                x
+                    ++ if modBy 3 number == 0 then
+                        "Fizz"
+                       else
+                        ""
+              )
+            , (\x ->
+                x
+                    ++ if modBy 5 number == 0 then
+                        "Buzz"
+                       else
+                        ""
+              )
+            , (\x ->
+                x
+                    ++ if x == "" then
+                        String.fromInt number
+                       else
+                        ""
+              )
+            ]
+    in
+        (if modBy 3 number == 0 then
+            "Fizz"
+         else
+            ""
+        )
+            |> (\x ->
+                    x
+                        ++ if modBy 5 number == 0 then
+                            "Buzz"
+                           else
+                            ""
+               )
+            |> (\x ->
+                    x
+                        ++ if x == "" then
+                            String.fromInt number
+                           else
+                            ""
+               )
+
 
 renderFizzBuzzSequence : FizzBuzzModel -> Html msg
 renderFizzBuzzSequence model =
     renderList model.sequence
 
 
-
 updateFizzBuzzModel : FizzBuzzModel -> FizzBuzzModel
-updateFizzBuzzModel model = 
-    { model |
-        sequence = List.range 1 100
-            |> List.map String.fromInt
+updateFizzBuzzModel model =
+    { model
+        | sequence =
+            List.range 1 100
+                |> List.map String.fromInt
     }
+
 
 renderList : List String -> Html msg
 renderList lst =
     lst
-       |> List.map (\l -> li [] [ text l ])
-       |> ul []
+        |> List.map (\l -> li [] [ text l ])
+        |> ul []
