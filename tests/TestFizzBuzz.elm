@@ -3,7 +3,7 @@ module TestFizzBuzz exposing (..)
 import Expect exposing (Expectation)
 import Fuzz exposing (Fuzzer, int, list, string)
 import Test exposing (..)
-import FizzBuzz exposing (FizzBuzzModel, initialFizzBuzzModel, updateFizzBuzzModel, renderFizzBuzzSequence)
+import FizzBuzz exposing (FizzBuzzModel, initialFizzBuzzModel, updateFizzBuzzModel, renderFizzBuzzSequence, determineFizzBuzz)
 
 
 -- Write a program that prints the numbers from 1 to 100. But for multiples of three print "Fizz" instead of the number and for the multiples of five print "Buzz". For numbers which are multiples of both three and five print "FizzBuzz".
@@ -43,6 +43,20 @@ updateFizzBuzzModelSuite =
                 in
                 [List.length initialFizzBuzzModel.sequence, List.length actual.sequence]
                     |> Expect.equal [0, 100]
+        , test "Valid state is updated if correct syllables" <|
+            \_ ->
+                True
+                |> Expect.equal True
+        ]
+
+     
+regularNumberSuite : Test
+regularNumberSuite =
+    describe "determineFizzBuzz returns string version of a number"
+        [ test "If it is not divisible by 3" <|
+            \_ ->
+                determineFizzBuzz 2
+                    |> Expect.equal "2"
         , test "Valid state is updated if correct syllables" <|
             \_ ->
                 True

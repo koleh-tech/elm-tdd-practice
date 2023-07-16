@@ -1,4 +1,4 @@
-module FizzBuzz exposing (FizzBuzzModel, initialFizzBuzzModel, updateFizzBuzzModel, renderFizzBuzzSequence)
+module FizzBuzz exposing (FizzBuzzModel, initialFizzBuzzModel, updateFizzBuzzModel, renderFizzBuzzSequence, determineFizzBuzz)
 
 import List
 import Char
@@ -15,6 +15,10 @@ type alias FizzBuzzModel =
 initialFizzBuzzModel : FizzBuzzModel
 initialFizzBuzzModel =
     { sequence = [] }
+
+determineFizzBuzz : Int -> String
+determineFizzBuzz number =
+    "test"
 
 renderFizzBuzzSequence : FizzBuzzModel -> Html msg
 renderFizzBuzzSequence model =
