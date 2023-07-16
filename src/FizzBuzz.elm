@@ -20,7 +20,7 @@ determineFizzBuzz : Int -> String
 determineFizzBuzz number =
     (if modBy 3 number == 0 then "Fizz" else "")
         |> (\x -> x ++ if modBy 5 number == 0 then "Buzz" else "")
-        |> (\x -> x ++ if not (modBy 5 number == 0 || modBy 3 number == 0) then String.fromInt number else "")
+        |> (\x -> x ++ if x == "" then String.fromInt number else "")
 
 renderFizzBuzzSequence : FizzBuzzModel -> Html msg
 renderFizzBuzzSequence model =
