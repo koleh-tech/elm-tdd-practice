@@ -24,7 +24,11 @@ updateHaikuReviewModel : HaikuReviewModel -> String -> HaikuReviewModel
 updateHaikuReviewModel model userInput = 
     { model
         | isValid = isValidHaiku userInput
-        , syllables = haikuSyllables userInput |> List.map String.fromInt |> List.map (\x -> x ++ ",") |> String.concat |> String.slice 0 -1
+        , syllables = haikuSyllables userInput
+            |> List.map String.fromInt
+            |> List.map (\x -> x ++ ",")
+            |> String.concat
+            |> String.slice 0 -1
     }
 
 isValidHaiku : String -> Bool
