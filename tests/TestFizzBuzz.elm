@@ -7,7 +7,9 @@ import Test exposing (..)
 import FizzBuzz exposing (FizzBuzzModel, initialFizzBuzzModel, updateFizzBuzzModel, renderFizzBuzzSequence, determineFizzBuzz)
 
 
--- Write a program that prints the numbers from 1 to 100. But for multiples of three print "Fizz" instead of the number and for the multiples of five print "Buzz". For numbers which are multiples of both three and five print "FizzBuzz".
+-- Write a program that prints the numbers from 1 to 100.
+-- But for multiples of three print "Fizz" instead of the number and for the multiples of five print "Buzz".
+-- For numbers which are multiples of both three and five print "FizzBuzz".
 -- 
 -- Sample output:
 -- 
@@ -44,17 +46,13 @@ updateFizzBuzzModelSuite =
                 in
                 [List.length initialFizzBuzzModel.sequence, List.length actual.sequence]
                     |> Expect.equal [0, 100]
-        , test "Valid state is updated if correct syllables" <|
-            \_ ->
-                True
-                |> Expect.equal True
         ]
 
      
 regularNumberSuite : Test
 regularNumberSuite =
     describe "determineFizzBuzz returns string version of a number"
-        [ test "If it is not divisible by 3" <|
+        [ test "If it is not divisible by 3 and/or 5" <|
             \_ ->
                 let
                     input = [1,
@@ -70,8 +68,14 @@ regularNumberSuite =
                 in
                 List.map determineFizzBuzz input
                     |> Expect.equal (List.map String.fromInt input)
-        , test "Valid state is updated if correct syllables" <|
+        ]
+
+     
+divisibleby3NumberSuite : Test
+divisibleby3NumberSuite =
+    describe "determineFizzBuzz returns fizz"
+        [ test "If the number is divisible by 3" <|
             \_ ->
-                True
-                |> Expect.equal True
+                determineFizzBuzz 3
+                    |> Expect.equal "Fizz"
         ]
