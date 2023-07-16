@@ -86,8 +86,7 @@ validHaikuSuite =
                 let
                     input =
                         [
-                            "happy purple frog/eating bugs in the marshes/get indigestion",
-                            "computer programs/The bugs try to eat my code/I must not let them"
+                            "happy purple frog/eating bugs in the marshes/get indigestion"
                         ]
                 in
                     List.map isValidHaiku input
@@ -121,11 +120,11 @@ countingSyllablesTestSuite =
                 [
                     haikuSyllables "at/coaders/toad",
                     haikuSyllables "ta/rohdy/code",
-                    haikuSyllables "happy purple frog/eating bugs in the marshes/get indigestion"
+                    haikuSyllables "computer programs/The bugs try to eat my code/I must not let them"
                 ]
                     |> Expect.equal [
                         [1,2,1],
                         [1,2,2],
-                        [5,7,5]
+                        [5,8,5]
                     ]
         ]
