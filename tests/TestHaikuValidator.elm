@@ -62,7 +62,7 @@ updateHaikuReviewModelSuite =
                     userInput = "testing//"
                 in
                 updateHaikuReviewModel initialHaikuReviewModel userInput
-                    |> Expect.equal {initialHaikuReviewModel | syllables = "2,0,0"}
+                    |> Expect.equal {initialHaikuReviewModel | isValid = False, syllables = "2,0,0"}
         , test "They are blank strings" <|
             \_ ->
                 isValidHaiku "//"
