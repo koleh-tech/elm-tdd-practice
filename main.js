@@ -5698,7 +5698,7 @@ var $elm$html$Html$li = _VirtualDom_node('li');
 var $elm$virtual_dom$VirtualDom$text = _VirtualDom_text;
 var $elm$html$Html$text = $elm$virtual_dom$VirtualDom$text;
 var $elm$html$Html$ul = _VirtualDom_node('ul');
-var $author$project$FizzBuzz$renderList = function (lst) {
+var $author$project$FizzBuzz$renderFizzBuzzSequence = function (model) {
 	return A2(
 		$elm$html$Html$ul,
 		_List_Nil,
@@ -5713,10 +5713,7 @@ var $author$project$FizzBuzz$renderList = function (lst) {
 							$elm$html$Html$text(l)
 						]));
 			},
-			lst));
-};
-var $author$project$FizzBuzz$renderFizzBuzzSequence = function (model) {
-	return $author$project$FizzBuzz$renderList(model.sequence);
+			model.sequence));
 };
 var $elm$html$Html$section = _VirtualDom_node('section');
 var $elm$html$Html$Attributes$type_ = $elm$html$Html$Attributes$stringProperty('type');

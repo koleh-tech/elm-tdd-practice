@@ -27,7 +27,9 @@ determineFizzBuzz number =
 
 renderFizzBuzzSequence : FizzBuzzModel -> Html msg
 renderFizzBuzzSequence model =
-    renderList model.sequence
+    model.sequence
+        |> List.map (\l -> li [] [ text l ])
+        |> ul []
 
 
 updateFizzBuzzModel : FizzBuzzModel -> FizzBuzzModel
@@ -37,10 +39,3 @@ updateFizzBuzzModel model =
             List.range 1 100
                 |> List.map determineFizzBuzz
     }
-
-
-renderList : List String -> Html msg
-renderList lst =
-    lst
-        |> List.map (\l -> li [] [ text l ])
-        |> ul []
