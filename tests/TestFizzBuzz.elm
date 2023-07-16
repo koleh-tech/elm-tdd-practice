@@ -70,6 +70,11 @@ determineFizzBuzzSuite =
                     |> Expect.equal (List.map String.fromInt input)
         , test "Return 'Fizz' if the number is divisible by 3" <|
             \_ ->
-                determineFizzBuzz 3
-                    |> Expect.equal "Fizz"
+                let
+                    input = [3, 6, 9, 12, 18, 21, 24, 27, 33, 36, 39, 42, 48, 51, 54, 57, 63, 66, 69, 72, 78, 81, 84, 87, 93, 96, 99]
+                in
+                List.map determineFizzBuzz input
+                    |> List.filter (\x -> x ==  "Fizz")
+                    |> List.length
+                    |> Expect.equal (List.length input)
         ]
