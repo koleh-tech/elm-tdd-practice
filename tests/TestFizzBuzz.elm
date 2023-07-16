@@ -127,7 +127,7 @@ fizzBuzzNumberSuite =
         [ test "If the number is divisible by 3 and 5" <|
             \_ ->
                 let
-                    input = [15, 30, 45, 60, 75, 90, 81]
+                    input = [15, 30, 45, 60, 75, 90]
                 in
                 List.map determineFizzBuzz input
                     |> Expect.equal (List.map (\x -> "FizzBuzz") input)
