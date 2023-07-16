@@ -10,6 +10,7 @@ import FormatNumber exposing (format)
 import FormatNumber.Locales exposing (Decimals(..), Locale, usLocale)
 import LeapYear exposing (yearType)
 import BestShuffle exposing (bestShuffle, numberOfDifferingCharacters)
+import HaikuValidator exposing (updateHaikuReviewModel, HaikuReviewModel, initialHaikuReviewModel, getHaikuValidOrNot, getHaikuSyllables)
 
 
 type alias BestShuffleModel =
@@ -45,6 +46,7 @@ initialLeapYearModel =
 type alias Model =
     { leapYearModel : LeapYearModel
     , bestShuffleModel : BestShuffleModel
+    , haikuReviewModel : HaikuReviewModel
     }
 
 
@@ -52,12 +54,14 @@ initialModel : Model
 initialModel =
     { leapYearModel = initialLeapYearModel
     , bestShuffleModel = initialBestShuffleModel
+    , haikuReviewModel = initialHaikuReviewModel
     }
 
 
 type Msg
     = YearClassification String
     | BestShuffle String
+    | HaikuReview String
 
 
 view : Model -> Html Msg
@@ -91,6 +95,22 @@ view model =
                 )
                 []
             , bestShuffleText model
+                |> text
+            ]
+        , div [ class "container" ]
+            [ h1 [ class "title" ] [ text "Haiku Review" ]
+            , h2 [ class "subtitle" ] [ text "Checks validity of Haikus, as well as providing the number of syllables." ]
+            , label [ for "ToShuffle", class "label" ] [ text "Haiku to check:" ]
+            , input
+                ([ name "HaikuToCheck"
+                 , class "input"
+                 , type_ "text"
+                 , onInput HaikuReview
+                 ]
+                    ++ getHaikuValidOrNot model.haikuReviewModel
+                )
+                []
+            , getHaikuSyllables model.haikuReviewModel
                 |> text
             ]
         ]
@@ -137,6 +157,10 @@ update msg model =
                             }
                     in
                         { model | bestShuffleModel = withBestShuffle (model.bestShuffleModel) }
+        HaikuReview userInput ->
+            { model |
+                haikuReviewModel = updateHaikuReviewModel model.haikuReviewModel userInput
+            }
 
 
 getBestShuffleValidOrNot : Model -> List (Html.Attribute msg)

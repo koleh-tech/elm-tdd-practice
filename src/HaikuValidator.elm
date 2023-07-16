@@ -1,10 +1,12 @@
-module HaikuValidator exposing (isValidHaiku, haikuSyllables, updateHaikuReviewModel, HaikuReviewModel, initialHaikuReviewModel)
+module HaikuValidator exposing (isValidHaiku, haikuSyllables, updateHaikuReviewModel, HaikuReviewModel, initialHaikuReviewModel, getHaikuValidOrNot, getHaikuSyllables)
 
 import List
 import Char
 import List.Extra exposing (groupWhile)
 import Array
 import String
+import Html exposing (Html, div, text, input, section, h1, h2, label)
+import Html.Attributes exposing (class, name, type_, for, value)
 
 
 type alias HaikuReviewModel =
@@ -19,6 +21,19 @@ initialHaikuReviewModel =
     , isValid = True
     , syllables = ""
     }
+
+getHaikuValidOrNot : HaikuReviewModel -> List (Html.Attribute msg)
+getHaikuValidOrNot model =
+    if model.isValid == True then
+        [ class "input" ]
+    else
+        [ class "input is-danger" ]
+
+getHaikuSyllables : HaikuReviewModel -> String
+getHaikuSyllables model =
+    model.syllables
+
+
 
 updateHaikuReviewModel : HaikuReviewModel -> String -> HaikuReviewModel
 updateHaikuReviewModel model userInput = 

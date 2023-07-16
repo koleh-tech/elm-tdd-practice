@@ -4372,8 +4372,9 @@ function _Browser_load(url)
 }
 var $elm$core$Basics$True = {$: 'True'};
 var $author$project$Main$initialBestShuffleModel = {bestShuffle: '', isValid: true, numDifferingChars: 0, originalWord: ''};
+var $author$project$HaikuValidator$initialHaikuReviewModel = {haiku: '', isValid: true, syllables: ''};
 var $author$project$Main$initialLeapYearModel = {year: 0, yearType: ''};
-var $author$project$Main$initialModel = {bestShuffleModel: $author$project$Main$initialBestShuffleModel, leapYearModel: $author$project$Main$initialLeapYearModel};
+var $author$project$Main$initialModel = {bestShuffleModel: $author$project$Main$initialBestShuffleModel, haikuReviewModel: $author$project$HaikuValidator$initialHaikuReviewModel, leapYearModel: $author$project$Main$initialLeapYearModel};
 var $elm$core$Basics$EQ = {$: 'EQ'};
 var $elm$core$Basics$GT = {$: 'GT'};
 var $elm$core$Basics$LT = {$: 'LT'};
@@ -5347,9 +5348,145 @@ var $author$project$BestShuffle$bestShuffle = function (input) {
 			input,
 			$author$project$BestShuffle$shuffleString(input)));
 };
+var $elm$core$String$concat = function (strings) {
+	return A2($elm$core$String$join, '', strings);
+};
+var $elm_community$list_extra$List$Extra$groupWhile = F2(
+	function (isSameGroup, items) {
+		return A3(
+			$elm$core$List$foldr,
+			F2(
+				function (x, acc) {
+					if (!acc.b) {
+						return _List_fromArray(
+							[
+								_Utils_Tuple2(x, _List_Nil)
+							]);
+					} else {
+						var _v1 = acc.a;
+						var y = _v1.a;
+						var restOfGroup = _v1.b;
+						var groups = acc.b;
+						return A2(isSameGroup, x, y) ? A2(
+							$elm$core$List$cons,
+							_Utils_Tuple2(
+								x,
+								A2($elm$core$List$cons, y, restOfGroup)),
+							groups) : A2(
+							$elm$core$List$cons,
+							_Utils_Tuple2(x, _List_Nil),
+							acc);
+					}
+				}),
+			_List_Nil,
+			items);
+	});
+var $elm$core$List$any = F2(
+	function (isOkay, list) {
+		any:
+		while (true) {
+			if (!list.b) {
+				return false;
+			} else {
+				var x = list.a;
+				var xs = list.b;
+				if (isOkay(x)) {
+					return true;
+				} else {
+					var $temp$isOkay = isOkay,
+						$temp$list = xs;
+					isOkay = $temp$isOkay;
+					list = $temp$list;
+					continue any;
+				}
+			}
+		}
+	});
+var $elm$core$List$member = F2(
+	function (x, xs) {
+		return A2(
+			$elm$core$List$any,
+			function (a) {
+				return _Utils_eq(a, x);
+			},
+			xs);
+	});
+var $elm$core$Char$toLower = _Char_toLower;
+var $author$project$HaikuValidator$isSyllable = function (toCheck) {
+	return function (c) {
+		return A2(
+			$elm$core$List$member,
+			c,
+			_List_fromArray(
+				[
+					_Utils_chr('a'),
+					_Utils_chr('e'),
+					_Utils_chr('i'),
+					_Utils_chr('o'),
+					_Utils_chr('u'),
+					_Utils_chr('y')
+				]));
+	}(
+		$elm$core$Char$toLower(toCheck));
+};
+var $elm$core$Basics$neq = _Utils_notEqual;
+var $author$project$HaikuValidator$numberOfSyllablesInList = function (word) {
+	return $elm$core$List$length(
+		A2(
+			$elm$core$List$filter,
+			function (a) {
+				return !_Utils_eq(
+					a,
+					_Utils_Tuple2(false, _List_Nil));
+			},
+			A2(
+				$elm_community$list_extra$List$Extra$groupWhile,
+				F2(
+					function (a, b) {
+						return a && b;
+					}),
+				A2($elm$core$List$map, $author$project$HaikuValidator$isSyllable, word))));
+};
+var $author$project$HaikuValidator$haikuSyllables = function (haiku) {
+	return A2(
+		$elm$core$List$map,
+		$author$project$HaikuValidator$numberOfSyllablesInList,
+		A2(
+			$elm$core$List$map,
+			$elm$core$String$toList,
+			A2($elm$core$String$split, '/', haiku)));
+};
+var $author$project$HaikuValidator$isValidHaiku = function (haiku) {
+	return _Utils_eq(
+		$author$project$HaikuValidator$haikuSyllables(haiku),
+		_List_fromArray(
+			[5, 7, 5]));
+};
 var $elm$core$Basics$negate = function (n) {
 	return -n;
 };
+var $author$project$HaikuValidator$updateHaikuReviewModel = F2(
+	function (model, userInput) {
+		return _Utils_update(
+			model,
+			{
+				isValid: $author$project$HaikuValidator$isValidHaiku(userInput),
+				syllables: A3(
+					$elm$core$String$slice,
+					0,
+					-1,
+					$elm$core$String$concat(
+						A2(
+							$elm$core$List$map,
+							function (x) {
+								return x + ',';
+							},
+							A2(
+								$elm$core$List$map,
+								$elm$core$String$fromInt,
+								$author$project$HaikuValidator$haikuSyllables(userInput)))))
+			});
+	});
 var $author$project$LeapYear$convertUserInput = function (input) {
 	var _v0 = $elm$core$String$toInt(input);
 	if (_v0.$ === 'Nothing') {
@@ -5360,7 +5497,6 @@ var $author$project$LeapYear$convertUserInput = function (input) {
 	}
 };
 var $elm$core$Basics$ge = _Utils_ge;
-var $elm$core$Basics$neq = _Utils_notEqual;
 var $author$project$LeapYear$isLeapYear = function (year) {
 	return ((!(year % 4)) && (!(!(year % 100)))) || (!(year % 400));
 };
@@ -5370,55 +5506,66 @@ var $author$project$LeapYear$yearType = function (year) {
 };
 var $author$project$Main$update = F2(
 	function (msg, model) {
-		if (msg.$ === 'YearClassification') {
-			var userInput = msg.a;
-			var updateYearType = function (yearModel) {
-				return _Utils_update(
-					yearModel,
-					{
-						yearType: $author$project$LeapYear$yearType(userInput)
-					});
-			};
-			return _Utils_update(
-				model,
-				{
-					leapYearModel: updateYearType(model.leapYearModel)
-				});
-		} else {
-			var userInput = msg.a;
-			var _v1 = $author$project$BestShuffle$bestShuffle(userInput);
-			if (_v1.$ === 'Nothing') {
-				var bestShuffleInvalid = function (bestShuffleModel) {
+		switch (msg.$) {
+			case 'YearClassification':
+				var userInput = msg.a;
+				var updateYearType = function (yearModel) {
 					return _Utils_update(
-						bestShuffleModel,
-						{isValid: false});
-				};
-				return _Utils_update(
-					model,
-					{
-						bestShuffleModel: bestShuffleInvalid(model.bestShuffleModel)
-					});
-			} else {
-				var result = _v1.a;
-				var withBestShuffle = function (bestShuffleModel) {
-					return _Utils_update(
-						bestShuffleModel,
+						yearModel,
 						{
-							bestShuffle: result,
-							isValid: true,
-							numDifferingChars: A2($author$project$BestShuffle$numberOfDifferingCharacters, userInput, result)
+							yearType: $author$project$LeapYear$yearType(userInput)
 						});
 				};
 				return _Utils_update(
 					model,
 					{
-						bestShuffleModel: withBestShuffle(model.bestShuffleModel)
+						leapYearModel: updateYearType(model.leapYearModel)
 					});
-			}
+			case 'BestShuffle':
+				var userInput = msg.a;
+				var _v1 = $author$project$BestShuffle$bestShuffle(userInput);
+				if (_v1.$ === 'Nothing') {
+					var bestShuffleInvalid = function (bestShuffleModel) {
+						return _Utils_update(
+							bestShuffleModel,
+							{isValid: false});
+					};
+					return _Utils_update(
+						model,
+						{
+							bestShuffleModel: bestShuffleInvalid(model.bestShuffleModel)
+						});
+				} else {
+					var result = _v1.a;
+					var withBestShuffle = function (bestShuffleModel) {
+						return _Utils_update(
+							bestShuffleModel,
+							{
+								bestShuffle: result,
+								isValid: true,
+								numDifferingChars: A2($author$project$BestShuffle$numberOfDifferingCharacters, userInput, result)
+							});
+					};
+					return _Utils_update(
+						model,
+						{
+							bestShuffleModel: withBestShuffle(model.bestShuffleModel)
+						});
+				}
+			default:
+				var userInput = msg.a;
+				return _Utils_update(
+					model,
+					{
+						haikuReviewModel: A2($author$project$HaikuValidator$updateHaikuReviewModel, model.haikuReviewModel, userInput)
+					});
 		}
 	});
 var $author$project$Main$BestShuffle = function (a) {
 	return {$: 'BestShuffle', a: a};
+};
+var $author$project$Main$HaikuReview = function (a) {
+	return {$: 'HaikuReview', a: a};
 };
 var $author$project$Main$YearClassification = function (a) {
 	return {$: 'YearClassification', a: a};
@@ -5439,6 +5586,18 @@ var $elm$html$Html$div = _VirtualDom_node('div');
 var $elm$html$Html$Attributes$for = $elm$html$Html$Attributes$stringProperty('htmlFor');
 var $author$project$Main$getBestShuffleValidOrNot = function (model) {
 	return model.bestShuffleModel.isValid ? _List_fromArray(
+		[
+			$elm$html$Html$Attributes$class('input')
+		]) : _List_fromArray(
+		[
+			$elm$html$Html$Attributes$class('input is-danger')
+		]);
+};
+var $author$project$HaikuValidator$getHaikuSyllables = function (model) {
+	return model.syllables;
+};
+var $author$project$HaikuValidator$getHaikuValidOrNot = function (model) {
+	return model.isValid ? _List_fromArray(
 		[
 			$elm$html$Html$Attributes$class('input')
 		]) : _List_fromArray(
@@ -5602,6 +5761,60 @@ var $author$project$Main$view = function (model) {
 						_List_Nil),
 						$elm$html$Html$text(
 						$author$project$Main$bestShuffleText(model))
+					])),
+				A2(
+				$elm$html$Html$div,
+				_List_fromArray(
+					[
+						$elm$html$Html$Attributes$class('container')
+					]),
+				_List_fromArray(
+					[
+						A2(
+						$elm$html$Html$h1,
+						_List_fromArray(
+							[
+								$elm$html$Html$Attributes$class('title')
+							]),
+						_List_fromArray(
+							[
+								$elm$html$Html$text('Haiku Review')
+							])),
+						A2(
+						$elm$html$Html$h2,
+						_List_fromArray(
+							[
+								$elm$html$Html$Attributes$class('subtitle')
+							]),
+						_List_fromArray(
+							[
+								$elm$html$Html$text('Checks validity of Haikus, as well as providing the number of syllables.')
+							])),
+						A2(
+						$elm$html$Html$label,
+						_List_fromArray(
+							[
+								$elm$html$Html$Attributes$for('ToShuffle'),
+								$elm$html$Html$Attributes$class('label')
+							]),
+						_List_fromArray(
+							[
+								$elm$html$Html$text('Haiku to check:')
+							])),
+						A2(
+						$elm$html$Html$input,
+						_Utils_ap(
+							_List_fromArray(
+								[
+									$elm$html$Html$Attributes$name('HaikuToCheck'),
+									$elm$html$Html$Attributes$class('input'),
+									$elm$html$Html$Attributes$type_('text'),
+									$elm$html$Html$Events$onInput($author$project$Main$HaikuReview)
+								]),
+							$author$project$HaikuValidator$getHaikuValidOrNot(model.haikuReviewModel)),
+						_List_Nil),
+						$elm$html$Html$text(
+						$author$project$HaikuValidator$getHaikuSyllables(model.haikuReviewModel))
 					]))
 			]));
 };
