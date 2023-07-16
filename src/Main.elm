@@ -192,9 +192,34 @@ Sample Output
         , div [ class "container" ]
             [ h1 [ class "title" ] [ text "FizzBuzz" ]
             , h3 [ class "subtitle" ] [ text "Initial specification:" ]
-            , pre [] [text """the fizz buzz problem"""]
-            , label [ for "InitiateFizzBuzz", class "label" ] [ text "Get FizzBuzz sequence 1..100" ]
-            , button [ onClick FizzBuzz ]  [ text "FizzBuzz" ]
+            , pre [] [text """Write a program that prints the numbers from 1 to 100.
+But for multiples of three print "Fizz" instead of the number and for the multiples of five print "Buzz".
+For numbers which are multiples of both three and five print "FizzBuzz".
+
+Sample output:
+
+1
+2
+Fizz
+4
+Buzz
+Fizz
+7
+8
+Fizz
+Buzz
+11
+Fizz
+13
+14
+FizzBuzz
+16
+17
+Fizz
+19
+Buzz
+... etc up to 100"""]
+            , button [ onClick FizzBuzz ]  [ text "Get FizzBuzz sequence 1 to 100" ]
             , renderFizzBuzzSequence model.fizzBuzzModel
             ]
         ]

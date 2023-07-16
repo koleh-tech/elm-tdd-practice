@@ -5942,18 +5942,7 @@ var $author$project$Main$view = function (model) {
 						_List_Nil,
 						_List_fromArray(
 							[
-								$elm$html$Html$text('the fizz buzz problem')
-							])),
-						A2(
-						$elm$html$Html$label,
-						_List_fromArray(
-							[
-								$elm$html$Html$Attributes$for('InitiateFizzBuzz'),
-								$elm$html$Html$Attributes$class('label')
-							]),
-						_List_fromArray(
-							[
-								$elm$html$Html$text('Get FizzBuzz sequence 1..100')
+								$elm$html$Html$text('Write a program that prints the numbers from 1 to 100.\nBut for multiples of three print "Fizz" instead of the number and for the multiples of five print "Buzz".\nFor numbers which are multiples of both three and five print "FizzBuzz".\n\nSample output:\n\n1\n2\nFizz\n4\nBuzz\nFizz\n7\n8\nFizz\nBuzz\n11\nFizz\n13\n14\nFizzBuzz\n16\n17\nFizz\n19\nBuzz\n... etc up to 100')
 							])),
 						A2(
 						$elm$html$Html$button,
@@ -5963,7 +5952,7 @@ var $author$project$Main$view = function (model) {
 							]),
 						_List_fromArray(
 							[
-								$elm$html$Html$text('FizzBuzz')
+								$elm$html$Html$text('Get FizzBuzz sequence 1 to 100')
 							])),
 						$author$project$FizzBuzz$renderFizzBuzzSequence(model.fizzBuzzModel)
 					]))
