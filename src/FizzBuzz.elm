@@ -18,7 +18,7 @@ initialFizzBuzzModel =
 
 determineFizzBuzz : Int -> String
 determineFizzBuzz number =
-    if number == 3 then
+    if modBy 3 number == 0 then
         "Fizz"
     else
         String.fromInt number
