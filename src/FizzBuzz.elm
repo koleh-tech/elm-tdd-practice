@@ -20,50 +20,9 @@ initialFizzBuzzModel =
 
 determineFizzBuzz : Int -> String
 determineFizzBuzz number =
-    let
-        strategies =
-            [ (\x ->
-                x
-                    ++ if modBy 3 number == 0 then
-                        "Fizz"
-                       else
-                        ""
-              )
-            , (\x ->
-                x
-                    ++ if modBy 5 number == 0 then
-                        "Buzz"
-                       else
-                        ""
-              )
-            , (\x ->
-                x
-                    ++ if x == "" then
-                        String.fromInt number
-                       else
-                        ""
-              )
-            ]
-    in
-        (if modBy 3 number == 0 then
-            "Fizz"
-         else
-            ""
-        )
-            |> (\x ->
-                    x
-                        ++ if modBy 5 number == 0 then
-                            "Buzz"
-                           else
-                            ""
-               )
-            |> (\x ->
-                    x
-                        ++ if x == "" then
-                            String.fromInt number
-                           else
-                            ""
-               )
+    (if modBy 3 number == 0 then "Fizz" else "")
+    |> (\x -> x ++ if modBy 5 number == 0 then "Buzz" else "")
+    |> (\x -> x ++ if x == "" then String.fromInt number else "")
 
 
 renderFizzBuzzSequence : FizzBuzzModel -> Html msg
