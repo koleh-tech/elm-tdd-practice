@@ -1,8 +1,8 @@
 module Main exposing (..)
 
 import Browser
-import Html exposing (Html, div, text, input, section, h1, h2, h3, label,  pre)
-import Html.Events exposing (onInput)
+import Html exposing (Html, div, text, input, button, section, h1, h2, h3, label,  pre)
+import Html.Events exposing (onInput, onClick)
 import Html.Attributes exposing (class, name, type_, for, value)
 import String
 import Debug exposing (log)
@@ -11,6 +11,7 @@ import FormatNumber.Locales exposing (Decimals(..), Locale, usLocale)
 import LeapYear exposing (yearType)
 import BestShuffle exposing (bestShuffle, numberOfDifferingCharacters)
 import HaikuValidator exposing (updateHaikuReviewModel, HaikuReviewModel, initialHaikuReviewModel, getHaikuValidOrNot, getHaikuSyllables)
+import FizzBuzz exposing (FizzBuzzModel, initialFizzBuzzModel, updateFizzBuzzModel, renderFizzBuzzSequence)
 
 
 type alias BestShuffleModel =
@@ -47,6 +48,7 @@ type alias Model =
     { leapYearModel : LeapYearModel
     , bestShuffleModel : BestShuffleModel
     , haikuReviewModel : HaikuReviewModel
+    , fizzBuzzModel :FizzBuzzModel
     }
 
 
@@ -55,6 +57,7 @@ initialModel =
     { leapYearModel = initialLeapYearModel
     , bestShuffleModel = initialBestShuffleModel
     , haikuReviewModel = initialHaikuReviewModel
+    , fizzBuzzModel  = initialFizzBuzzModel
     }
 
 
@@ -62,6 +65,7 @@ type Msg
     = YearClassification String
     | BestShuffle String
     | HaikuReview String
+    | FizzBuzz
 
 
 view : Model -> Html Msg
@@ -185,6 +189,14 @@ Sample Output
             , getHaikuSyllables model.haikuReviewModel
                 |> text
             ]
+        , div [ class "container" ]
+            [ h1 [ class "title" ] [ text "FizzBuzz" ]
+            , h3 [ class "subtitle" ] [ text "Initial specification:" ]
+            , pre [] [text """the fizz buzz problem"""]
+            , label [ for "InitiateFizzBuzz", class "label" ] [ text "Get FizzBuzz sequence 1..100" ]
+            , button [ onClick FizzBuzz ]  [ text "FizzBuzz" ]
+            , renderFizzBuzzSequence model.fizzBuzzModel
+            ]
         ]
 
 
@@ -232,6 +244,10 @@ update msg model =
         HaikuReview userInput ->
             { model |
                 haikuReviewModel = updateHaikuReviewModel model.haikuReviewModel userInput
+            }
+        FizzBuzz ->
+            { model |
+                fizzBuzzModel = updateFizzBuzzModel model.fizzBuzzModel
             }
 
 
