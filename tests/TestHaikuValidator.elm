@@ -105,7 +105,7 @@ countingSyllablesTestSuite =
                 [
                     haikuSyllables "a/qwtjk/i",
                     haikuSyllables "qwtjk/a/i",
-                    haikuSyllables "i/a/qwtjk"
+                    haikuSyllables "i/A/qwtjk"
                 ]
                     |> Expect.equal [
                         [1,0,1],
