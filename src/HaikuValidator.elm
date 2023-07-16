@@ -13,6 +13,19 @@ type alias HaikuReviewModel =
     , syllables : String
     }
 
+initialHaikuReviewModel : HaikuReviewModel
+initialHaikuReviewModel =
+    { haiku = ""
+    , isValid = True
+    , syllables = ""
+    }
+
+-- updateHaikuReviewModel : HaikuReviewModel -> String -> HaikuReviewModel
+-- updateHaikuReviewModel model userInput = 
+--     { model
+--         | isValid = isValidHaiku userInput
+--         , syllables = haikuSyllables userInput |> List.map String.fromInt |> List.map (\x -> x ++ ",") |> String.concat
+--     }
 
 isValidHaiku : String -> Bool
 isValidHaiku haiku =
